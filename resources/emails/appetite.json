@@ -1,0 +1,156 @@
+[
+  {
+    "subject": "Market or Appetite",
+    "receivedDateTime": "2025-08-12T10:23:15Z",
+    "sender": {
+      "emailAddress": {
+        "address": "mike.rodriguez@premierinsurance.com",
+        "name": "Mike Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was working through your quoting tool and did not see an ISO code in your system for Day Care either child or adult but did see schools. Can you confirm if you have a market for Day Cares?\n\nThanks,\nMike Rodriguez\nPremier Insurance Group\n(555) 123-4567"
+    }
+  },
+  {
+    "subject": "Appetite",
+    "receivedDateTime": "2025-08-25T14:45:32Z",
+    "sender": {
+      "emailAddress": {
+        "address": "sarah@coastalrisk.com",
+        "name": "Sarah Johnson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Liquor Liability in South Carolina?"
+    }
+  },
+  {
+    "subject": "New Business Opportunity",
+    "receivedDateTime": "2025-08-08T16:17:44Z",
+    "sender": {
+      "emailAddress": {
+        "address": "jennifer.lee@innovativeins.com",
+        "name": "Jennifer Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Underwriting Team,</p><p>I have a potential client in the cannabis industry that I'd like to discuss with you. They operate a licensed medical marijuana dispensary in Colorado with the following characteristics:</p><ul><li>Annual revenue: $2.5M</li><li>Employee count: 15</li><li>Security: 24/7 monitoring, armed guards</li><li>Transportation: Own vehicles for delivery</li><li>Previous claims: 1 slip & fall 2 years ago ($15K)</li></ul><p>I know this is a complex risk class, but wanted to check if you have any appetite for this type of business. They're looking for GL, Property, and Auto coverage.</p><p>What are your thoughts on this one?</p><br><p>Thanks,</p><div style=\"background-color:#f8f9fa; border:2px solid #6f42c1; border-radius:8px; padding:20px; margin:20px 0; box-shadow:0 2px 4px rgba(0,0,0,0.1);\"><p style=\"font-size:18px; color:#6f42c1; margin:0; font-weight:bold;\">Jennifer Lee</p><p style=\"font-size:14px; margin:0; color:#495057; font-style:italic;\">Innovative Insurance Solutions</p><hr style=\"border:0; border-top:1px solid #d1ecf1; margin:15px 0;\"><p style=\"margin:0;\"><a href=\"mailto:jennifer.lee@innovativeins.com\" style=\"color:#6f42c1; text-decoration:none; font-weight:500;\">jennifer.lee@innovativeins.com</a></p></div></body></html>"
+    }
+  },
+  {
+    "subject": "Food Truck Coverage - Multiple States",
+    "receivedDateTime": "2025-08-20T11:33:21Z",
+    "sender": {
+      "emailAddress": {
+        "address": "david@metrobrokers.com",
+        "name": "David Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi there,\n\nI have a food truck client that operates in 5 states (TX, NM, AZ, CA, NV). They do festivals, corporate events, and some street vending. Revenue about $800K annually.\n\nDo you write food trucks? And if so, what states are you comfortable with? Also, do you have any restrictions on the types of food they serve?\n\nThanks,\nDavid Chen\nMetro Brokers"
+    }
+  },
+  {
+    "subject": "Client Placement Question",
+    "receivedDateTime": "2025-08-15T09:52:17Z",
+    "sender": {
+      "emailAddress": {
+        "address": "lisa@constructionrisk.com",
+        "name": "Lisa Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>I have a general contractor client that I'm having trouble placing due to their claims history. Here are the details:</p><p style=\"margin-left:20px;\">• Business: Commercial construction, primarily retail and office buildings<br>• Revenue: $12M annually<br>• Claims in last 3 years:<br>  - 2023: $85K property damage claim<br>  - 2022: $125K bodily injury claim<br>  - 2021: $45K property damage claim</p><p>They've implemented new safety protocols and haven't had any claims in the last 18 months. Are you comfortable with this type of risk profile, or is this outside your appetite?</p><p>Thanks,<br>Lisa Thompson<br>Construction Risk Specialists</p></body></html>"
+    }
+  },
+  {
+    "subject": "Cyber Coverage for Healthcare Provider",
+    "receivedDateTime": "2025-08-28T13:18:33Z",
+    "sender": {
+      "emailAddress": {
+        "address": "robert@cyberpro.com",
+        "name": "Robert Wilson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Underwriting,\n\nI have a healthcare client - a small medical practice with 8 doctors and 25 staff. They're looking for cyber liability coverage.\n\nThey handle patient data and are subject to HIPAA. They have basic security measures in place but no formal cybersecurity program.\n\nDo you write cyber for healthcare? What are your minimum requirements? And do you offer any risk management services?\n\nThanks,\nRobert Wilson\nCyberPro Insurance"
+    }
+  },
+  {
+    "subject": "Aviation - Crop Duster Coverage",
+    "receivedDateTime": "2025-08-03T15:42:08Z",
+    "sender": {
+      "emailAddress": {
+        "address": "mark@aviationrisk.com",
+        "name": "Mark Stevens"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Do you write aviation coverage for agricultural operations? Specifically crop dusting?\n\nClient has 3 planes, 2 pilots, operates in Midwest states. Annual revenue $500K.\n\nMark Stevens\nAviation Risk Specialists"
+    }
+  }
+]

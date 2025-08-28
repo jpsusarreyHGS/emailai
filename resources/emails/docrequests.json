@@ -1,0 +1,133 @@
+[
+  {
+    "subject": "URGENT: Need Certificate of Insurance for Contract Deadline",
+    "receivedDateTime": "2025-08-14T09:23:15Z",
+    "sender": {
+      "emailAddress": {
+        "address": "l.rodriguez@metroconstruction.com",
+        "name": "Luis Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>We have a <strong style=\"color:#d32f2f;\">URGENT</strong> request for a Certificate of Insurance. We're finalizing a major contract with the City of Phoenix and need to submit proof of coverage by <u>Friday, August 18th</u>.</p><p>Please issue a Certificate of Insurance showing:</p><ul><li>General Liability: $2,000,000 per occurrence</li><li>Workers' Compensation: Statutory limits</li><li>Auto Liability: $1,000,000 per occurrence</li></ul><p>Please send this as soon as possible. This is critical for our business.</p><br><p>Thank you,</p><div style=\"border-top: 3px solid #d32f2f; padding-top: 15px; margin-top: 20px;\"><p style=\"font-size:16px; color:#d32f2f; font-weight:bold; margin:0;\">Luis Rodriguez</p><p style=\"font-size:12px; margin:0; color:#666;\">Contracts Manager</p><p style=\"margin:0;\"><a href=\"mailto:l.rodriguez@metroconstruction.com\" style=\"color:#d32f2f; text-decoration:none;\">l.rodriguez@metroconstruction.com</a></p><p style=\"font-weight:bold; margin:0; color:#333;\">(602) 555-8471</p></div></body></html>"
+    }
+  },
+  {
+    "subject": "Annual Review Documentation",
+    "receivedDateTime": "2025-08-22T16:45:32Z",
+    "sender": {
+      "emailAddress": {
+        "address": "sarah.williams@northstarconsulting.com",
+        "name": "Sarah Williams"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello Customer Service Team,\n\nI'm conducting our annual insurance review and need a complete copy of our current policy documents. Could you please provide:\n\n1. Complete policy declarations\n2. All endorsements and riders\n3. Policy forms and conditions\n4. Current premium breakdown\n5. Any recent correspondence\n\nWe're planning to review our coverage with our broker next week, so having these documents would be very helpful.\n\nPlease send via email if possible, or let me know if you need to mail physical copies.\n\nThank you for your assistance.\n\nBest regards,\nSarah Williams\nRisk Management Director\nNorthstar Consulting Group\n(312) 555-2298"
+    }
+  },
+  {
+    "subject": "Proof of Insurance Needed for Loan Application",
+    "receivedDateTime": "2025-08-08T11:17:44Z",
+    "sender": {
+      "emailAddress": {
+        "address": "mike@riversideauto.com",
+        "name": "Mike Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hi there,</p><p>I'm applying for a business loan and the bank needs proof of insurance for our commercial auto fleet. Can you send me a certificate showing our current coverage?</p><p>They specifically need to see:</p><p style=\"margin-left:20px;\">• Commercial Auto Liability<br>• Physical Damage coverage<br>• Umbrella policy info</p><p>Also, if you could include a letter confirming our policy is active and in good standing, that would be great.</p><p>Thanks!<br>Mike</p><p style=\"font-size:11px; color:#666;\">Riverside Auto Service<br>mike@riversideauto.com</p></body></html>"
+    }
+  },
+  {
+    "subject": "Missing Endorsement Document",
+    "receivedDateTime": "2025-08-29T14:33:21Z",
+    "sender": {
+      "emailAddress": {
+        "address": "jennifer.lee@sunsetproperties.com",
+        "name": "Jennifer Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Insurance Team,\n\nI'm looking for a copy of an endorsement that was processed last month (July 2025) that added Sunset Properties Management LLC as an Additional Insured to our policy.\n\nI can't seem to locate the paperwork, and I need it for our records. Could you please send me a copy of that endorsement?\n\nOur policy number is: SP-2025-001\n\nThank you for your help.\n\nJennifer Lee\nProperty Manager\nSunset Properties\njennifer.lee@sunsetproperties.com\n(305) 555-7766"
+    }
+  },
+  {
+    "subject": "Need Insurance Verification Letter ASAP",
+    "receivedDateTime": "2025-08-05T08:52:17Z",
+    "sender": {
+      "emailAddress": {
+        "address": "tom@quickfixplumbing.com",
+        "name": "Tom Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hey guys,</p><p>I got a call from a potential client who wants me to start work tomorrow, but they need proof of insurance first. Can you send me something that shows we're covered?</p><p>I need it today if possible. Just something that says we have general liability and workers comp coverage.</p><p>Thanks a lot!<br>Tom</p><br><p style=\"font-size:12px; color:#666;\">Quick Fix Plumbing<br>tom@quickfixplumbing.com<br>(713) 555-4421</p></body></html>"
+    }
+  },
+  {
+    "subject": "need proof of insurance",
+    "receivedDateTime": "2025-08-17T22:08:15Z",
+    "sender": {
+      "emailAddress": {
+        "address": "bob@quickfixelectrical.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hey,\n\nneed something that shows we have insurance. client wants to see it before we start work tomorrow.\n\njust send whatever u got that proves we're covered.\n\nthx\nbob"
+    }
+  }
+]

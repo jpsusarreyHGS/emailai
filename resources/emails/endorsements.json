@@ -1,0 +1,218 @@
+[
+  {
+    "subject": "[ENDORSEMENT] RIVERSTONE PARTNERS 21 LLC - K0047MP118392-00",
+    "receivedDateTime": "2025-08-23T14:37:22Z",
+    "sender": {
+      "emailAddress": {
+        "address": "m.turner@harborcoverisk.com",
+        "name": "Michael Turner"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Greetings!</p><p>Please replace/modify the current Additional Insured on the policy to the following:</p><p style=\"margin-left:20px;\">Oakridge Plaza IV, LLC<br>and HorizonPoint Commercial Realty Advisors<br>745 Evergreen Avenue, Suite 310<br>Greenville, NC 27858</p><p>Thank you,</p><p>---</p><!-- Signature block --><div style=\"border-left: 4px solid #0066cc; padding-left: 15px; margin: 20px 0;\"><p style=\"font-size:18px; color:#0066cc; margin:0; font-weight:bold;\">Michael Turner</p><p style=\"text-decoration:underline; margin:0; color:#333;\">Commercial Team</p><p style=\"font-size:12px; font-weight:bold; margin:0; color:#666;\">Customer Service</p><br><p style=\"margin:0;\"><a href=\"mailto:m.turner@harborcoverisk.com\" style=\"color:#0066cc; text-decoration:none;\">m.turner@harborcoverisk.com</a></p><p style=\"font-weight:bold; margin:0; color:#333;\">(407) 892-6412 x 227</p></div></body></html>"
+    }
+  },
+  {
+    "subject": "[ENDORSEMENT] OAKRIDGE PLAZA IV LLC – M0062HT004512-00",
+    "receivedDateTime": "2025-08-07T09:15:43Z",
+    "sender": {
+      "emailAddress": {
+        "address": "k.diaz@midwestbuilders.com",
+        "name": "Karen Diaz"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nPlease update the Certificate Holder on the policy as follows:\n\n   Riverside Construction, LLC\n   2150 Maplewood Drive\n   Springfield, IL 62711\n\nCan you confirm once this has been processed and send me a revised certificate?\n\nBest regards,  \nKaren Diaz  \nRisk Management Assistant  \nMidwest Builders Group"
+    }
+  },
+  {
+    "subject": "Waiver of Subrogation Request – Horizon Medical Partners",
+    "receivedDateTime": "2025-08-31T16:22:08Z",
+    "sender": {
+      "emailAddress": {
+        "address": "s.peterson@sterlingrisk.com",
+        "name": "Samuel Peterson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good afternoon,</p><p>I need to request an endorsement to add a <strong>Waiver of Subrogation</strong> in favor of the following:</p><p style=\"margin-left:20px;\">Horizon Medical Partners<br>8900 Lakeside Parkway<br>Atlanta, GA 30339</p><p>Please advise if any additional premium will apply and forward the amended policy documents once complete.</p><p>Thank you,</p><div style=\"background-color:#f8f9fa; border:1px solid #dee2e6; border-radius:5px; padding:15px; margin:20px 0;\"><p style=\"font-size:16px; color:#004488; margin:0; font-weight:bold;\">Samuel Peterson</p><p style=\"font-size:12px; margin:0; color:#6c757d;\">Operations Coordinator</p><hr style=\"border:0; border-top:1px solid #dee2e6; margin:10px 0;\"><p style=\"margin:0;\"><a href=\"mailto:s.peterson@sterlingrisk.com\" style=\"color:#004488; text-decoration:none;\">s.peterson@sterlingrisk.com</a></p><p style=\"font-weight:bold; margin:0; color:#495057;\">(770) 555-9210</p></div></body></html>"
+    }
+  },
+  {
+    "subject": "Additional Insured Request",
+    "receivedDateTime": "2025-08-12T11:45:17Z",
+    "sender": {
+      "emailAddress": {
+        "address": "j.mills@coastalretail.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Team,\n\nCould you please endorse the policy to include the following as an Additional Insured?\n\n   Coastal Retail Group, LLC\n   451 Bayshore Blvd\n   Tampa, FL 33606\n\nThis is required under our lease agreement with them. Please confirm receipt and estimated turnaround time.\n\nThanks,  \nJonathan Mills\nProperty Manager"
+    }
+  },
+  {
+    "subject": "Policy Information Update",
+    "receivedDateTime": "2025-08-03T08:33:55Z",
+    "sender": {
+      "emailAddress": {
+        "address": "agr@bluerockservices.com",
+        "name": "Alicia Grant"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Dear Customer Service,</p><p>We noticed an error on our policy documents. The <u>Named Insured</u> is currently listed as:</p><blockquote>\"Blue Rock Services, Inc.\"</blockquote><p>It should read:</p><blockquote>\"Blue Rock Services, LLC\"</blockquote><p>Please issue a correction endorsement reflecting the proper entity name.</p><br><p>Sincerely,</p><p><strong>Alicia Grant</strong><br> Blue Rock Services<br> <a href=\"mailto:agr@bluerockservices.com\">agr@bluerockservices.com</a><br> (410) 775-2331</p></body></html>"
+    }
+  },
+  {
+    "subject": "Please add new facility in Austin",
+    "receivedDateTime": "2025-08-19T13:28:41Z",
+    "sender": {
+      "emailAddress": {
+        "address": "m.thompson@thompsongrey.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nPlease add the following new premises location to our policy, effective 9/1/2025:\n\n   1425 Canyon Ridge Drive\n   Austin, TX 78735\n\nThis will serve as our second distribution facility. Please confirm coverage is in place and let us know if any inspection is required.\n\nKind regards,  \nMelissa Thompson  \nLogistics Coordinator  \nThompson & Grey Supply Co."
+    }
+  },
+  {
+    "subject": "Need to remove sold vehicle from policy",
+    "receivedDateTime": "2025-08-25T10:52:36Z",
+    "sender": {
+      "emailAddress": {
+        "address": "d.lopez@atlanticmaintenance.com",
+        "name": "David Lopez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi there,  \n\nWe need to cancel coverage for the vehicle listed under our commercial auto policy:  \n\n   2019 Ford Transit Van  \n   VIN: 1FTYR2CM7KKA12345  \n\nThe vehicle was sold last month. Please process the cancellation endorsement effective 8/15/2025 and send us the updated schedule.  \n\nThanks,  \nDavid Lopez  \nFleet Manager  \nAtlantic Maintenance Services"
+    }
+  },
+  {
+    "subject": "Lease requirement – add landlord",
+    "receivedDateTime": "2025-08-15T07:41:19Z",
+    "sender": {
+      "emailAddress": {
+        "address": "r.nguyen@clearviewpartners.com",
+        "name": "Rachel Nguyen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Customer Service,</p><p>Per our lease requirements, please endorse the policy to add our landlord as an Additional Insured:</p><p style=\"margin-left:20px;\">Greenhill Property Group, LLC<br>600 Market Street, Suite 2200<br>Philadelphia, PA 19103</p><p>Could you also send a copy of the updated Certificate of Insurance once completed? </p><br><p>Many thanks,</p><p style=\"font-weight:bold; color:#2a2a2a; margin:0;\">Rachel Nguyen</p><p style=\"font-size:12px; margin:0;\">Office Administrator</p><p><a href=\"mailto:r.nguyen@clearviewpartners.com\">r.nguyen@clearviewpartners.com</a> | (215) 660-4889</p></body></html>"
+    }
+  },
+  {
+    "subject": "new address for coverage",
+    "receivedDateTime": "2025-08-28T20:14:33Z",
+    "sender": {
+      "emailAddress": {
+        "address": "maria@hillcrestproperties.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hi,  \n\npls add my landlord as additional insured:  \nHillcrest Properties LLC  \n28 E Main St  \nNewark NJ 07102  \n\nsend me the cert when done.  \n\nthanks  \nmaria"
+    }
+  },
+  {
+    "subject": "add landlord + send cert",
+    "receivedDateTime": "2025-08-05T18:56:47Z",
+    "sender": {
+      "emailAddress": {
+        "address": "chris@willowbrook.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hey,  \n\ncan u guys add my new address to the policy. we moved last week and i dont want there to be any issues if something happens  \n\n317 Willowbrook Ct  \nRaleigh NC 27609  \n\nthx  \n- Chris"
+    }
+  }
+]

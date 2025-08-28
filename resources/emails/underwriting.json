@@ -1,0 +1,134 @@
+[
+  {
+    "subject": "ISO Code Mapping Issue - Quoting Tool",
+    "receivedDateTime": "2025-08-14T11:25:33Z",
+    "sender": {
+      "emailAddress": {
+        "address": "karen@premiumbrokers.com",
+        "name": "Karen Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Support Team,</p><p>I'm having trouble with the ISO code mapping in your quoting tool. When I select \"Restaurant\" as the business class, it's showing multiple ISO codes but I can't determine which one applies to my client's specific situation.</p><p>My client operates a food truck that also has a brick-and-mortar location. They do catering, delivery, and have a small dining area. The tool shows codes for:</p><ul><li>Restaurant - No Delivery</li><li>Restaurant - With Delivery</li><li>Mobile Food Service</li><li>Catering Service</li></ul><p>Which ISO code should I use for this hybrid operation? Also, is there documentation available that explains the differences between these classifications?</p><p>Thanks,</p><div style=\"background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%); border:1px solid #2196f3; border-radius:6px; padding:18px; margin:20px 0;\"><p style=\"font-size:16px; color:#1565c0; margin:0; font-weight:bold;\">Karen Martinez</p><p style=\"font-size:12px; margin:0; color:#1976d2; font-weight:500;\">Premium Brokers</p><hr style=\"border:0; border-top:1px solid #90caf9; margin:12px 0;\"><p style=\"margin:0; font-size:11px; color:#424242;\">Technical Support Specialist</p></div></body></html>"
+    }
+  },
+  {
+    "subject": "Policy Form Endorsement Availability",
+    "receivedDateTime": "2025-08-22T15:42:18Z",
+    "sender": {
+      "emailAddress": {
+        "address": "mike@constructionrisk.com",
+        "name": "Mike Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI'm working on a construction client and need to know what additional insured endorsements are available for your general liability policy.\n\nSpecifically, I need:\n1. CG 20 10 - Additional Insured - Owners, Lessees or Contractors\n2. CG 20 37 - Additional Insured - Designated Person or Organization\n3. CG 20 38 - Additional Insured - Person or Organization\n\nAre all of these available? And what are the limitations or restrictions on each?\n\nAlso, do you have any specific endorsements for project-specific additional insured status?\n\nThanks,\nMike Thompson\nConstruction Risk Specialists"
+    }
+  },
+  {
+    "subject": "Loss Run Dispute",
+    "receivedDateTime": "2025-08-09T09:18:47Z",
+    "sender": {
+      "emailAddress": {
+        "address": "lisa@metroinsurance.com",
+        "name": "Lisa Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>I have a client who is disputing some claims that are showing up on their loss runs. They're saying these claims were either settled for different amounts or shouldn't be there at all.</p><p>What's the process for verifying or disputing claims information? Do I need to have the client contact you directly, or can I submit documentation on their behalf?</p><p>Also, how long does it typically take to get a response on claims verification requests?</p><p>Thanks,<br>Lisa Chen<br>Metro Insurance Group</p></body></html>"
+    }
+  },
+  {
+    "subject": "Quoting Tool Error - Premium Calculation",
+    "receivedDateTime": "2025-08-28T13:55:22Z",
+    "sender": {
+      "emailAddress": {
+        "address": "david@northstarins.com",
+        "name": "David Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI'm getting an error in your quoting tool when trying to calculate premium for a commercial property policy. The error message says \"Premium calculation failed - contact support.\"\n\nHere's what I'm trying to do:\n- Building: Office building, 15,000 sq ft\n- Construction: Frame with brick veneer\n- Protection: 5 miles from fire station\n- Occupancy: Professional office\n- Coverage: $2M building, $500K contents\n\nI've tried refreshing the page and re-entering the information, but keep getting the same error. Is this a known issue? Can you help me troubleshoot?\n\nThanks,\nDavid Rodriguez\nNorthstar Insurance"
+    }
+  },
+  {
+    "subject": "Policy Territory and Coverage Extensions",
+    "receivedDateTime": "2025-08-16T10:33:41Z",
+    "sender": {
+      "emailAddress": {
+        "address": "sarah@globalrisk.com",
+        "name": "Sarah Williams"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hi Support Team,</p><p>I have a client that operates in multiple states and needs clarification on territory coverage.</p><p>Their business operates in:\n- Primary location: California\n- Regular operations: Nevada, Arizona\n- Occasional work: Oregon, Washington</p><p>I see your policy shows \"Worldwide coverage\" but with some exclusions. Can you clarify:</p><ol><li>Are there any specific territory restrictions I should be aware of?</li><li>Do you offer coverage extensions for international operations?</li><li>Are there any special requirements for operations in certain states?</li></ol><p>Also, do you have a territory endorsement that specifically lists covered states?</p><p>Thanks,<br>Sarah Williams<br>Global Risk Solutions</p></body></html>"
+    }
+  },
+  {
+    "subject": "Manufacturing Client Requirements",
+    "receivedDateTime": "2025-08-05T16:27:15Z",
+    "sender": {
+      "emailAddress": {
+        "address": "robert@safetyfirst.com",
+        "name": "Robert Johnson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI'm working with a manufacturing client and need to understand your loss control requirements and documentation process.\n\nWhat specific loss control measures are required for:\n- Manufacturing operations with 50+ employees\n- Operations involving hazardous materials\n- Facilities with material handling equipment\n\nDo you have checklists or forms that need to be completed? And what's the process for submitting loss control documentation?\n\nAlso, are there any specific training requirements for employees that need to be documented?\n\nThanks,\nRobert Johnson\nSafety First Insurance"
+    }
+  }
+]

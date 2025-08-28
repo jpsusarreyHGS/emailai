@@ -1,0 +1,132 @@
+[
+  {
+    "subject": "Good morning. Is this a direct bill policy?",
+    "receivedDateTime": "2025-08-11T08:15:22Z",
+    "sender": {
+      "emailAddress": {
+        "address": "j.smith@acmecontracting.com",
+        "name": "John Smith"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Good morning. Is this a direct bill policy?"
+    }
+  },
+  {
+    "subject": "Renewal Notice Question",
+    "receivedDateTime": "2025-08-19T14:32:08Z",
+    "sender": {
+      "emailAddress": {
+        "address": "m.garcia@sunsetrestaurant.com",
+        "name": "Maria Garcia"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello,</p><p>I received our renewal notice and the premium increased significantly this year. We're a small family restaurant and this is putting a strain on our budget.</p><p>Do you offer any payment plan options? We'd prefer to pay monthly or quarterly if possible.</p><p>Also, could you explain why the premium went up so much? We haven't had any claims.</p><p>Thank you,</p><div style=\"background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #28a745; padding: 15px; margin: 20px 0; border-radius: 0 5px 5px 0;\"><p style=\"font-weight:bold; margin:0; color:#155724; font-size:16px;\">Maria Garcia</p><p style=\"font-size:12px; margin:0; color:#6c757d;\">Owner, Sunset Restaurant</p><hr style=\"border:0; border-top:1px solid #c3e6cb; margin:10px 0;\"><p style=\"margin:0;\"><a href=\"mailto:m.garcia@sunsetrestaurant.com\" style=\"color:#155724; text-decoration:none;\">m.garcia@sunsetrestaurant.com</a></p><p style=\"font-weight:bold; margin:0; color:#495057;\">(505) 555-1234</p></div></body></html>"
+    }
+  },
+  {
+    "subject": "Invoice #INV-2025-8472 - Payment Received",
+    "receivedDateTime": "2025-08-07T11:45:33Z",
+    "sender": {
+      "emailAddress": {
+        "address": "accounts@riversideconstruction.com",
+        "name": "Accounts Payable"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThis email confirms that payment for Invoice #INV-2025-8472 in the amount of $12,847.50 has been processed and received on August 7, 2025.\n\nPayment Method: ACH Transfer\nReference Number: ACH-2025-0814\n\nPlease update your records accordingly.\n\nThank you,\nAccounts Payable Department\nRiverside Construction, LLC\n(602) 555-9876"
+    }
+  },
+  {
+    "subject": "why did u charge me twice",
+    "receivedDateTime": "2025-08-25T16:28:41Z",
+    "sender": {
+      "emailAddress": {
+        "address": "dave@quickfixplumbing.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "why did u charge me twice for the same policy? i see two charges on my credit card statement. this is bs. fix it now."
+    }
+  },
+  {
+    "subject": "Policy Cancellation Question",
+    "receivedDateTime": "2025-08-13T09:17:55Z",
+    "sender": {
+      "emailAddress": {
+        "address": "r.thompson@northshoreproperties.com",
+        "name": "Robert Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Dear Customer Service,</p><p>I'm writing regarding our policy #NS-2025-003 which was cancelled effective July 15, 2025. We paid the annual premium of $8,450.00 in full on January 15, 2025.</p><p>Since the policy was cancelled mid-term, I believe we're entitled to a pro-rated refund for the unused portion of the policy period (approximately 6.5 months).</p><p>Could you please calculate the refund amount and process it? I'd prefer a check mailed to our business address.</p><p>Thank you for your attention to this matter.</p><br><p>Sincerely,</p><p style=\"font-weight:bold; margin:0;\">Robert Thompson</p><p style=\"font-size:12px; margin:0;\">Property Manager</p><p>Northshore Properties<br><a href=\"mailto:r.thompson@northshoreproperties.com\">r.thompson@northshoreproperties.com</a><br>(206) 555-4455</p></body></html>"
+    }
+  },
+  {
+    "subject": "can i pay with credit card",
+    "receivedDateTime": "2025-08-30T13:42:19Z",
+    "sender": {
+      "emailAddress": {
+        "address": "lisa@smallbiz.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "can i pay with credit card? and do u take amex?"
+    }
+  }
+]
