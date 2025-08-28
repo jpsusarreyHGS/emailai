@@ -1,25 +1,25 @@
 import React from "react";
 
-/** items: [{ id, title, subtitle, at }] */
-export default function EmailList({ items, onOpen, mode }) {
-  const empty = {
-    incoming: "No incoming emails.",
-    open: "No open tickets.",
-    closed: "No closed tickets."
-  }[mode || "incoming"];
-
+export default function EmailList({ items, onOpen }) {
   return (
     <ul className="list">
-      {items.length === 0 && (
-        <li className="item">
-          <div className="title">{empty}</div>
-        </li>
-      )}
-      {items.map(x => (
-        <li key={x.id} className="item" onClick={() => onOpen(x.id)}>
-          <div className="title">{x.title}</div>
-          <div className="sub">{x.subtitle}</div>
-          <div className="sub">{new Date(x.at).toLocaleString()}</div>
+      {items.map((it) => (
+        <li key={it.id} className="item" onClick={() => onOpen(it.id)}>
+          <div className="title">{it.title}</div>
+          <div className="sub">{it.subtitle}</div>
+          <div className="meta-row">
+            {it.assignee?.name && (
+              <span className="pill assignee">Assigned: {it.assignee.name}</span>
+            )}
+            <span className="pill time">{new Date(it.at).toLocaleString()}</span>
+          </div>
+          {!!(it.tags && it.tags.length) && (
+            <div className="tag-row">
+              {it.tags.map((t, i) => (
+                <span key={i} className="pill tag">{t}</span>
+              ))}
+            </div>
+          )}
         </li>
       ))}
     </ul>
