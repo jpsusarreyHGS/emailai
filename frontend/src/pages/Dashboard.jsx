@@ -1,62 +1,106 @@
 import React, { useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import EmailList from "../components/EmailList";
 import EmailDetail from "../components/EmailDetail";
 
-export default function Dashboard() {
-  // Seed mock incoming emails
-  const [incomingEmails, setIncomingEmails] = useState([
-    {
-      id: "EML-1001",
-      subject: "Warranty Request: Store #123 (ZX100)",
-      from: { name: "Jane Doe", email: "jane@example.com" },
-      body:
-        "Hi team,\n\nAttaching receipt for ZX100.\nStore: BB-0421, Total: $1299.99.\n\nThanks,\nJane",
-      attachments: [
-        "https://via.placeholder.com/600x800?text=Receipt+1",
-        "https://via.placeholder.com/600x800?text=Receipt+2",
-      ],
-      received_at: new Date().toISOString(),
-      messageId: "msg-1001",
-    },
-    {
-      id: "EML-1002",
-      subject: "Warranty Request: QX55",
-      from: { name: "Mark Lee", email: "mark@example.com" },
-      body: "Hello, re-sending clearer photo.\nTotal: $249.50",
-      attachments: ["https://via.placeholder.com/600x800?text=Receipt+Blurry"],
-      received_at: new Date().toISOString(),
-      messageId: "msg-1002",
-    },
-  ]);
+const ROSTER = {
+  coach: { id: "coach", name: "Coach View", role: "coach" },
+  alice: { id: "alice", name: "Alice", role: "analyst" },
+  bob:   { id: "bob",   name: "Bob",   role: "analyst" },
+  cara:  { id: "cara",  name: "Cara",  role: "analyst" },
+};
 
-  // Tickets are created from incoming emails
+// Fallback seed emails (used only if nothing is passed from SortBoard)
+const DEFAULT_EMAILS = [
+  {
+    id: "EML-1001",
+    subject: "Warranty Request: Store #123 (ZX100)",
+    from: { name: "Jane Doe", email: "jane@example.com" },
+    body: "Hi team,\n\nAttaching receipt for ZX100 TV.\nStore: BB-0421, Total: $1299.99.\n\nThanks,\nJane",
+    attachments: [
+      "https://via.placeholder.com/600x800?text=Receipt+1",
+      "https://via.placeholder.com/600x800?text=Receipt+2",
+    ],
+    received_at: new Date().toISOString(),
+    messageId: "msg-1001",
+    assignee: { id: "alice", name: "Alice" },
+    tags: ["TV/Screen", "Warranty"]
+  },
+  {
+    id: "EML-1002",
+    subject: "Need help: Soundbar QX55 warranty",
+    from: { name: "Mark Lee", email: "mark@example.com" },
+    body: "Hello, re-sending a clearer receipt for the QX55 soundbar. Total: $249.50",
+    attachments: ["https://via.placeholder.com/600x800?text=Receipt+Blurry"],
+    received_at: new Date().toISOString(),
+    messageId: "msg-1002",
+    assignee: { id: "cara", name: "Cara" },
+    tags: ["Audio", "Warranty"]
+  }
+];
+
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
+  // Selected profile comes from SortBoard; default to Coach if missing.
+  const selectedProfile = state?.profile || ROSTER.coach;
+
+  // Use emails passed from SortBoard; else fallback seeds.
+  const seedEmails = useMemo(() => {
+    if (Array.isArray(state?.emails) && state.emails.length) {
+      return state.emails.map((e, idx) => ({
+        id: e.id || `EML-${idx + 1}`,
+        subject: e.subject,
+        from: e.from || { email: "unknown@example.com" },
+        body: e.body || "",
+        attachments: e.attachments || [],
+        received_at: e.at || new Date().toISOString(),
+        messageId: e.messageId || `msg-${idx + 1}`,
+        assignee: e.assignedTo
+          ? { id: e.assignedTo, name: e.assignedTo[0].toUpperCase() + e.assignedTo.slice(1) }
+          : undefined,
+        tags: e.tags || []
+      }));
+    }
+    return DEFAULT_EMAILS;
+  }, [state]);
+
+  // Incoming emails (clicking creates tickets)
+  const [incomingEmails, setIncomingEmails] = useState(seedEmails);
+
+  // Tickets exist separately
   const [tickets, setTickets] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  const openTickets = useMemo(
-    () => tickets.filter((t) => t.status !== "sent"),
-    [tickets]
-  );
-  const closedTickets = useMemo(
-    () => tickets.filter((t) => t.status === "sent"),
-    [tickets]
-  );
+  // Filter by profile (Coach sees all; analysts see only theirs)
+  const visibleIncoming = useMemo(() => {
+    if (selectedProfile.role === "coach") return incomingEmails;
+    return incomingEmails.filter(e => e.assignee?.id === selectedProfile.id);
+  }, [incomingEmails, selectedProfile]);
 
-  // Build a ticket from an email (with simple idempotency key)
+  const openTickets = useMemo(() => {
+    const all = tickets.filter(t => t.status !== "sent");
+    if (selectedProfile.role === "coach") return all;
+    return all.filter(t => t.assignee?.id === selectedProfile.id);
+  }, [tickets, selectedProfile]);
+
+  const closedTickets = useMemo(() => {
+    const all = tickets.filter(t => t.status === "sent");
+    if (selectedProfile.role === "coach") return all;
+    return all.filter(t => t.assignee?.id === selectedProfile.id);
+  }, [tickets, selectedProfile]);
+
   function mkTicketFromEmail(em) {
-    const attachKeys = (em.attachments || []).join("|");
-    const ingestionKey = `${em.messageId}|${attachKeys}`;
-    const exists = tickets.find((t) => t.ingestionKey === ingestionKey);
+    const ingestionKey = `${em.messageId}|${(em.attachments || []).join("|")}`;
+    const exists = tickets.find(t => t.ingestionKey === ingestionKey);
     if (exists) return exists;
 
-    const model = em.subject.match(/ZX100|QX55/)?.[0] || "—";
-
-    // Defaults (edit here if you want ZX100 to start with specific scores)
-    const defaultScores =
-      model === "ZX100"
-        ? { confidence: 92, dup_score: 36, fraud_score: 8 }
-        : { confidence: 92, dup_score: 12, fraud_score: 8 };  
+    const model = em.subject.match(/ZX100|QX55/i)?.[0]?.toUpperCase() || "—";
+    const defaultScores = model === "ZX100"
+      ? { confidence: 92, dup_score: 12, fraud_score: 8 }
+      : { confidence: 86, dup_score: 18, fraud_score: 10 };
 
     const t = {
       id: `TKT-${Math.random().toString(16).slice(2, 8).toUpperCase()}`,
@@ -67,102 +111,75 @@ export default function Dashboard() {
       received_at: em.received_at,
       status: "awaiting_review",
       email_body: em.body,
-      attachments: em.attachments.map((url, i) => ({
-        sasUrl: url,
-        blob: `mock/blob/${i}`,
-      })),
+      attachments: (em.attachments || []).map((url, i) => ({ sasUrl: url, blob: `mock/blob/${i}` })),
       extracted: {
-        merchant: em.body.includes("BB") ? "Best Buy" : "Unknown",
+        merchant: em.body?.includes("BB") ? "Best Buy" : "Unknown",
         date: new Date().toISOString().slice(0, 10),
-        total: em.body.includes("$1299.99") ? 1299.99 : 249.5,
+        total: em.body?.includes("$1299.99") ? 1299.99 : 249.5,
         model,
-        storeNumber: em.body.match(/BB-\d{4}/)?.[0] || "—",
+        storeNumber: em.body?.match(/BB-\d{4}/)?.[0] || "—",
       },
-      // store percentages (0–100)
-      scores: defaultScores,
+      scores: defaultScores, // 0–100 percentages
       validation: { status: "pass", rules_passed: ["merchant_known"], rules_failed: [] },
       draft_reply: {
         template: "approve",
         body:
-          `Hi ${em.from.name || "Customer"},\n\n` +
-          `We verified your purchase for ${tModel(em)}. Your warranty claim is approved.\n\nBest,\nSupport`,
+          `Hi ${em.from?.name || "Customer"},\n\n` +
+          `We verified your ${model} purchase on ${new Date().toISOString().slice(0,10)}. ` +
+          `Your warranty claim is approved.\n\nBest,\nSupport`,
       },
       thread: [
-        {
-          id: em.messageId,
-          direction: "in",
-          subject: em.subject,
-          body: em.body,
-          at: em.received_at,
-        },
+        { id: em.messageId, direction: "in", subject: em.subject, body: em.body, at: em.received_at }
       ],
+      assignee: em.assignee,
+      tags: em.tags || []
     };
     return t;
-
-    function tModel(e) {
-      const m = e.subject.match(/ZX100|QX55/);
-      return m ? m[0] : "your product";
-    }
   }
 
-  // Create ticket when an incoming email is clicked
   const handleOpenIncoming = (emailId) => {
-    const em = incomingEmails.find((e) => e.id === emailId);
+    const em = incomingEmails.find(e => e.id === emailId);
     if (!em) return;
     const t = mkTicketFromEmail(em);
 
-    setTickets((prev) => {
-      if (prev.find((x) => x.ingestionKey === t.ingestionKey)) return prev;
+    setTickets(prev => {
+      if (prev.find(x => x.ingestionKey === t.ingestionKey)) return prev;
       return [t, ...prev];
     });
-    setIncomingEmails((prev) => prev.filter((e) => e.id !== em.id));
+    setIncomingEmails(prev => prev.filter(e => e.id !== em.id)); // consume from Incoming
     setSelected(t);
   };
 
   const handleOpenTicket = (ticketId) => {
-    const t = tickets.find((x) => x.id === ticketId);
+    const t = tickets.find(x => x.id === ticketId);
     if (t) setSelected(t);
   };
 
-  // Save keeps it open
   const handleSave = (ticketId, draftBody) => {
-    setTickets((prev) =>
-      prev.map((t) =>
-        t.id === ticketId ? { ...t, draft_reply: { ...t.draft_reply, body: draftBody } } : t
-      )
+    setTickets(prev =>
+      prev.map(t => t.id === ticketId ? { ...t, draft_reply: { ...t.draft_reply, body: draftBody } } : t)
     );
   };
 
-  // Send → Closed
   const handleSend = (ticketId, draftBody) => {
-    setTickets((prev) =>
-      prev.map((t) =>
-        t.id === ticketId ? { ...t, status: "sent", draft_reply: { ...t.draft_reply, body: draftBody } } : t
-      )
+    setTickets(prev =>
+      prev.map(t => t.id === ticketId ? { ...t, status: "sent", draft_reply: { ...t.draft_reply, body: draftBody } } : t)
     );
-    setSelected(null);
+    setSelected(null); // back to lanes
   };
 
-  // Simulate customer reply → reopen same ticket
   const handleSimulateReply = (ticketId) => {
-    setTickets((prev) =>
-      prev.map((t) =>
-        t.id === ticketId
-          ? {
-              ...t,
-              status: "awaiting_review",
-              thread: [
-                ...t.thread,
-                {
-                  id: `reply-${Date.now()}`,
-                  direction: "in",
-                  subject: `Re: ${t.subject}`,
-                  body: "Customer: thanks!",
-                  at: new Date().toISOString(),
-                },
-              ],
-            }
-          : t
+    setTickets(prev =>
+      prev.map(t => t.id === ticketId
+        ? {
+            ...t,
+            status: "awaiting_review",
+            thread: [
+              ...t.thread,
+              { id: `reply-${Date.now()}`, direction: "in", subject: `Re: ${t.subject}`, body: "Customer: thanks!", at: new Date().toISOString() }
+            ]
+          }
+        : t
       )
     );
     setSelected(null);
@@ -170,29 +187,48 @@ export default function Dashboard() {
 
   const handleBackHome = () => setSelected(null);
 
+  // Dynamic header bits
+  const viewTitle =
+    selectedProfile.id === "coach"
+      ? "Coach View"
+      : `${selectedProfile.name} View`;
+
+  const roleSubtitle =
+    selectedProfile.id === "coach"
+      ? "See all tickets across analysts"
+      : "Analyst-specific view (assigned only)";
+
   return (
     <div className="dashboard">
+      {/* Header with dynamic title + back button */}
       <div className="header">
         <div className="brand">
           <div className="logo"></div>
           <div>
-            <div className="title">Warranty CRM</div>
-            <div className="subtitle">Incoming • Open • Closed</div>
+            <div className="title">{viewTitle}</div>
+            <div className="subtitle">{roleSubtitle}</div>
           </div>
+        </div>
+        <div>
+          <button className="btn secondary" onClick={() => navigate("/")}>
+            ← Back to Dashboard
+          </button>
         </div>
       </div>
 
+      {/* Lanes or Detail */}
       {!selected ? (
         <div className="board">
           <section className="column">
             <h2>Incoming Emails</h2>
             <EmailList
-              mode="incoming"
-              items={incomingEmails.map((e) => ({
+              items={visibleIncoming.map(e => ({
                 id: e.id,
                 title: e.subject,
-                subtitle: `${e.from?.name || ""} <${e.from.email}>`,
+                subtitle: `${e.from?.name || ""} <${e.from?.email || ""}>`,
                 at: e.received_at,
+                assignee: e.assignee,
+                tags: e.tags
               }))}
               onOpen={handleOpenIncoming}
             />
@@ -201,12 +237,13 @@ export default function Dashboard() {
           <section className="column">
             <h2>Open Tickets</h2>
             <EmailList
-              mode="open"
-              items={openTickets.map((t) => ({
+              items={openTickets.map(t => ({
                 id: t.id,
                 title: `[${t.id}] ${t.subject}`,
-                subtitle: `${t.sender?.name || ""} <${t.sender?.email}>`,
+                subtitle: `${t.sender?.name || ""} <${t.sender?.email || ""}>`,
                 at: t.received_at,
+                assignee: t.assignee,
+                tags: t.tags
               }))}
               onOpen={handleOpenTicket}
             />
@@ -215,12 +252,13 @@ export default function Dashboard() {
           <section className="column">
             <h2>Closed Tickets</h2>
             <EmailList
-              mode="closed"
-              items={closedTickets.map((t) => ({
+              items={closedTickets.map(t => ({
                 id: t.id,
                 title: `[${t.id}] ${t.subject}`,
-                subtitle: `${t.sender?.name || ""} <${t.sender?.email}>`,
+                subtitle: `${t.sender?.name || ""} <${t.sender?.email || ""}>`,
                 at: t.received_at,
+                assignee: t.assignee,
+                tags: t.tags
               }))}
               onOpen={handleOpenTicket}
             />

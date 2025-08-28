@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import Field from "./FIeld";
 
-
-/** Map % → color class for the score chip */
-function scoreClassByPercent(value /* 0..100 */) {
-  if (typeof value !== "number") return "score";
-  if (value <= 30) return "score bad";     // red
-  if (value <= 60) return "score mid";     // orange
-  return "score good";                      // green
+function scoreClassByPercent(v) {
+  if (typeof v !== "number") return "score";
+  if (v <= 30) return "score bad";
+  if (v <= 60) return "score mid";
+  return "score good";
 }
 
 export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply }) {
   const [draft, setDraft] = useState(ticket?.draft_reply?.body || "");
   const isClosed = ticket.status === "sent";
 
-  const conf  = ticket.scores?.confidence ?? 0;  // 0..100
-  const dup   = ticket.scores?.dup_score  ?? 0;  // 0..100
-  const fraud = ticket.scores?.fraud_score ?? 0; // 0..100
+  const conf = ticket.scores?.confidence ?? 0;
+  const dup  = ticket.scores?.dup_score ?? 0;
+  const fraud= ticket.scores?.fraud_score ?? 0;
 
   return (
     <div>
@@ -25,8 +23,16 @@ export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply
         <h2 style={{ margin: 0 }}>{ticket.subject}</h2>
         <span className={`badge ${isClosed ? "success" : ""}`}>{ticket.status}</span>
       </div>
-      <div className="sub" style={{ marginBottom: 16 }}>
+      <div className="sub" style={{ marginBottom: 10 }}>
         {ticket.sender?.name} &lt;{ticket.sender?.email}&gt; • {new Date(ticket.received_at).toLocaleString()}
+      </div>
+      <div className="meta-row" style={{ marginBottom: 16 }}>
+        {ticket.assignee?.name && <span className="pill assignee">Assigned: {ticket.assignee.name}</span>}
+        {!!(ticket.tags && ticket.tags.length) && (
+          <span className="pill tagline">
+            {ticket.tags.map((t, i) => <span key={i} className="pill tag">{t}</span>)}
+          </span>
+        )}
       </div>
 
       <div className="grid">
@@ -93,7 +99,7 @@ export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply
   );
 }
 
-function fmt(n){ 
+function fmt(n){
   if (typeof n !== "number") return "—";
   const v = Math.max(0, Math.min(100, Math.round(n)));
   return `${v}%`;
