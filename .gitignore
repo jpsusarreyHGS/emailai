@@ -28,3 +28,9 @@ Thumbs.db
 **/.vite/
 
 **/.vite-cache/
+
+# Poetry
+poetry.lock
+
+# VS Code
+.vscode
