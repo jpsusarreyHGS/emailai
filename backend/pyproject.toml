@@ -5,9 +5,13 @@ description = ""
 authors = [
     {name = "Darcy Anderson",email = "darcy.anderson@teamhgs.com"}
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.11,<4.0"
 dependencies = [
-    "azure-functions (>=1.23.0,<2.0.0)"
+    "azure-functions>=1.23.0,<2.0.0",
+    "azure-cosmos (>=4.9.0,<5.0.0)",
+    "python-dotenv>=1.0.0,<2.0.0",
+    "html2text (>=2025.4.15,<2026.0.0)",
+    "aihub @ file:./packages/aihub-0.0.1-py3-none-any.whl",
 ]
 
 
@@ -17,3 +21,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+debugpy = "^1.8.16"
