@@ -1,0 +1,222 @@
+[
+  {
+    "subject": "TV Screen Flickering",
+    "receivedDateTime": "2025-09-05T12:00:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer1@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello, my Hisense TV screen keeps flickering on and off after 20 minutes of use. Please advise on warranty coverage."
+    }
+  },
+  {
+    "subject": "Remote Control Not Working",
+    "receivedDateTime": "2025-09-05T12:05:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer2@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "The remote control for my Hisense TV stopped working even after replacing batteries. Can I request a replacement under warranty?"
+    }
+  },
+  {
+    "subject": "Refrigerator Cooling Issue",
+    "receivedDateTime": "2025-09-05T12:10:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer3@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "My Hisense refrigerator is not cooling properly. Food is spoiling quickly. Need warranty repair."
+    }
+  },
+  {
+    "subject": "Washing Machine Door Jammed",
+    "receivedDateTime": "2025-09-05T12:15:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer4@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "The door of my Hisense washing machine is stuck and won’t open. Please assist with warranty service."
+    }
+  },
+  {
+    "subject": "Microwave Not Heating",
+    "receivedDateTime": "2025-09-05T12:20:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer5@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "My Hisense microwave turns on but does not heat food anymore. Is this covered under warranty?"
+    }
+  },
+  {
+    "subject": "Air Conditioner Making Noise",
+    "receivedDateTime": "2025-09-05T12:25:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer6@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "The Hisense AC unit is making a loud grinding noise. I want to request a service under warranty."
+    }
+  },
+  {
+    "subject": "TV Display Cracked",
+    "receivedDateTime": "2025-09-05T12:30:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer7@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "I noticed cracks forming on my Hisense TV display. It wasn’t dropped. Is this covered by warranty?"
+    }
+  },
+  {
+    "subject": "Soundbar Connectivity Problem",
+    "receivedDateTime": "2025-09-05T12:35:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer8@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "My Hisense soundbar keeps disconnecting from Bluetooth devices. Can this be repaired under warranty?"
+    }
+  },
+  {
+    "subject": "Dishwasher Not Draining",
+    "receivedDateTime": "2025-09-05T12:40:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer9@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "My Hisense dishwasher is not draining water after a cycle. Please help with warranty repair."
+    }
+  },
+  {
+    "subject": "Projector Overheating",
+    "receivedDateTime": "2025-09-05T12:45:00Z",
+    "sender": {
+      "emailAddress": {
+        "address": "customer10@example.com",
+        "name": "Warranty Customer"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailai@teamhgs.com",
+          "name": "Email AI Team"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "The Hisense projector overheats after 15 minutes and shuts down automatically. Requesting warranty service."
+    }
+  }
+]

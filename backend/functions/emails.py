@@ -3,7 +3,7 @@ import logging
 
 import azure.functions as func
 from utils.db import query_container
-
+from utils.sanitize import sanitize_html, html_to_text
 
 def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
   """
@@ -104,3 +104,32 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
         status_code=500,
         mimetype="application/json"
     )
+
+def _normalize_email_record(raw):
+    # Adapt to your stored shape
+    body = raw.get("body") or {}
+    ctype = (body.get("contentType") or "").lower()
+    content = body.get("content") or ""
+
+    email_body_html = None
+    email_body_text = None
+
+    if ctype == "html":
+        clean = sanitize_html(content)
+        email_body_html = clean
+        email_body_text = html_to_text(clean)
+    else:
+        # contentType == "text" or missing
+        email_body_text = content
+
+    # Return a shape the frontend expects
+    return {
+        "id": raw.get("id"),
+        "subject": raw.get("subject") or "(no subject)",
+        "received_at": raw.get("receivedDateTime"),
+        "from": raw.get("sender", {}).get("emailAddress"),
+        "to": [r.get("emailAddress") for r in (raw.get("toRecipients") or [])],
+        "email_body_html": email_body_html,
+        "email_body_text": email_body_text,
+        # include your other fields (attachments, scores, labels, status, etc.)
+    }
