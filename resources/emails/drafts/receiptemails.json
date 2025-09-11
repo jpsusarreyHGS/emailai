@@ -1,0 +1,310 @@
+[
+  {
+    "subject": "Refund Request - MOD Pizza",
+    "receivedDateTime": "2025-09-09T15:12:34Z",
+    "from": {
+      "emailAddress": {
+        "address": "john.doe@example.com",
+        "name": "John Doe"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI was charged for a Mini MOD I did not receive. Please review and refund the charge shown on the attached receipt.\n\nThanks,\nJohn Doe"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-011.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - WinCo Foods",
+    "receivedDateTime": "2025-09-09T15:13:22Z",
+    "from": {
+      "emailAddress": {
+        "address": "sarah.smith@example.com",
+        "name": "Sarah Smith"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Team,\n\nSome frozen items thawed before I got home due to a bag tear at checkout. Im requesting reimbursement. Receipt attached.\n\nBest,\nSarah"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-002.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Warranty/Refund Request - Walmart (Chesterfield, MO)",
+    "receivedDateTime": "2025-09-09T15:14:10Z",
+    "from": {
+      "emailAddress": {
+        "address": "mike.brown@example.com",
+        "name": "Mike Brown"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThe toothbrush I purchased stopped working within a week. Please advise on warranty replacement or refund. Receipt attached.\n\nRegards,\nMike"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-003.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Walmart (Westminster, CA)",
+    "receivedDateTime": "2025-09-09T15:15:01Z",
+    "from": {
+      "emailAddress": {
+        "address": "anna.wilson@example.com",
+        "name": "Anna Wilson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was charged for an item I returned at the register. Please issue a refund using the attached receipt as reference.\n\nThanks,\nAnna"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-004.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Walmart (Lake Wales, FL)",
+    "receivedDateTime": "2025-09-09T15:16:20Z",
+    "from": {
+      "emailAddress": {
+        "address": "kevin.lee@example.com",
+        "name": "Kevin Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nOne item (Fiber Choice) was defective. Im requesting reimbursement. See attached receipt.\n\nRegards,\nKevin Lee"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-005.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Surati Farsan Mart",
+    "receivedDateTime": "2025-09-09T15:17:02Z",
+    "from": {
+      "emailAddress": {
+        "address": "meera.patel@example.com",
+        "name": "Meera Patel"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nThe to go Chole Samosa was spoiled when I opened it. Requesting a refund. Receipt attached.\n\nThanks,\nMeera Patel"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-006.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Panda Express",
+    "receivedDateTime": "2025-09-09T15:18:11Z",
+    "from": {
+      "emailAddress": {
+        "address": "linda.martinez@example.com",
+        "name": "Linda Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Support,\n\nI was double charged for an entre. Please reimburse the extra amount. Receipt attached.\n\nBest regards,\nLinda Martinez"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-007.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Blue Bear Tavern",
+    "receivedDateTime": "2025-09-09T15:19:05Z",
+    "from": {
+      "emailAddress": {
+        "address": "robert.jones@example.com",
+        "name": "Robert Jones"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThere are charges for drinks I didnt order. Please review and refund. See attached receipt.\n\nSincerely,\nRobert Jones"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-008.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - El Valle Mexican Restaurant",
+    "receivedDateTime": "2025-09-09T15:20:12Z",
+    "from": {
+      "emailAddress": {
+        "address": "carla.green@example.com",
+        "name": "Carla Green"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was overcharged for my Lunch Fajitas. Requesting a refund; receipt attached.\n\nThank you,\nCarla Green"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-009.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Lalos Mexican (Navy Pier)",
+    "receivedDateTime": "2025-09-09T15:21:30Z",
+    "from": {
+      "emailAddress": {
+        "address": "steven.harris@example.com",
+        "name": "Steven Harris"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Team,\n\nAn extra taco was charged by mistake. Please refund the difference. Receipt attached.\n\nSincerely,\nSteven Harris"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-010.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Amici Conyers",
+    "receivedDateTime": "2025-09-09T15:22:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "nina.davis@example.com",
+        "name": "Nina Davis"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nMy order was prepared incorrectly and I was charged extra. Requesting reimbursement. Attached is the receipt.\n\nBest,\nNina Davis"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-001.jpg"
+      }
+    ]
+  }
+]

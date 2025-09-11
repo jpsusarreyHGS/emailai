@@ -30,7 +30,7 @@ These emails relate to insurance policy endorsements, which are amendments to an
 insurance policy that add, remove, or modify coverage. Any straightforward request to alter some
 detail of an existing policy should be labelled with this category.
 
-2. Document Requests (category: docrequest)
+2. Document Requests (category: docRequest)
 These emails contain requests to provide some kind of documentation related to an existing
 insurance policy, for example proof of insurance, certificate of insurance, policy document, etc.
 Emails requesting documentation should be in this category, but if emails also request some other

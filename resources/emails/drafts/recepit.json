@@ -11,8 +11,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -22,9 +22,9 @@
   },
   "attachments": [
     {
-      "filename": "receipt-001.jpg",
+      "filename": "receipt-011.jpg",
       "contentType": "image/jpeg",
-      "blobPath": "receipt-001/receipt-001.jpg",
+      "blobPath": "receipt-011/receipt-011.jpg",
       "ocr": {
         "status": "pending",
         "text": null,
@@ -33,7 +33,7 @@
       }
     }
   ],
-  "id": "receipt-001"
+  "id": "receipt-011"
 },
 {
   "subject": "Reimbursement Request - WinCo Foods",
@@ -47,8 +47,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -83,8 +83,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -119,8 +119,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -155,8 +155,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -191,8 +191,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -227,8 +227,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -263,8 +263,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -299,8 +299,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -335,8 +335,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -371,8 +371,8 @@
   "toRecipients": [
     {
       "emailAddress": {
-        "address": "emailai@teamhgs.com",
-        "name": "Email AI Team"
+        "address": "emailaisolutions@teamhgs.com",
+        "name": "Email AI Solutions"
       }
     }
   ],
@@ -382,9 +382,9 @@
   },
   "attachments": [
     {
-      "filename": "receipt-011.jpg",
+      "filename": "receipt-001.jpg",
       "contentType": "image/jpeg",
-      "blobPath": "receipt-011/receipt-011.jpg",
+      "blobPath": "receipt-001/receipt-001.jpg",
       "ocr": {
         "status": "pending",
         "text": null,
@@ -393,6 +393,6 @@
       }
     }
   ],
-  "id": "receipt-011"
+  "id": "receipt-001"
 }
 ]

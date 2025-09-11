@@ -1,0 +1,1108 @@
+[
+  {
+    "subject": "Market or Appetite",
+    "receivedDateTime": "2025-08-12T10:23:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "mike.rodriguez@premierinsurance.com",
+        "name": "Mike Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was working through your quoting tool and did not see an ISO code in your system for Day Care either child or adult but did see schools. Can you confirm if you have a market for Day Cares?\n\nThanks,\nMike Rodriguez\nPremier Insurance Group\n(555) 123-4567"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Appetite",
+    "receivedDateTime": "2025-08-25T14:45:32Z",
+    "from": {
+      "emailAddress": {
+        "address": "sarah@coastalrisk.com",
+        "name": "Sarah Johnson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Liquor Liability in South Carolina?"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "New Business Opportunity",
+    "receivedDateTime": "2025-08-08T16:17:44Z",
+    "from": {
+      "emailAddress": {
+        "address": "jennifer.lee@innovativeins.com",
+        "name": "Jennifer Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Underwriting Team,</p><p>I have a potential client in the cannabis industry that I'd like to discuss with you. They operate a licensed medical marijuana dispensary in Colorado with the following characteristics:</p><ul><li>Annual revenue: $2.5M</li><li>Employee count: 15</li><li>Security: 24/7 monitoring, armed guards</li><li>Transportation: Own vehicles for delivery</li><li>Previous claims: 1 slip & fall 2 years ago ($15K)</li></ul><p>I know this is a complex risk class, but wanted to check if you have any appetite for this type of business. They're looking for GL, Property, and Auto coverage.</p><p>What are your thoughts on this one?</p><br><p>Thanks,</p><div style=\"background-color:#f8f9fa; border:2px solid #6f42c1; border-radius:8px; padding:20px; margin:20px 0; box-shadow:0 2px 4px rgba(0,0,0,0.1);\"><p style=\"font-size:18px; color:#6f42c1; margin:0; font-weight:bold;\">Jennifer Lee</p><p style=\"font-size:14px; margin:0; color:#495057; font-style:italic;\">Innovative Insurance Solutions</p><hr style=\"border:0; border-top:1px solid #d1ecf1; margin:15px 0;\"><p style=\"margin:0;\"><a href=\"mailto:jennifer.lee@innovativeins.com\" style=\"color:#6f42c1; text-decoration:none; font-weight:500;\">jennifer.lee@innovativeins.com</a></p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Food Truck Coverage - Multiple States",
+    "receivedDateTime": "2025-08-20T11:33:21Z",
+    "from": {
+      "emailAddress": {
+        "address": "david@metrobrokers.com",
+        "name": "David Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi there,\n\nI have a food truck client that operates in 5 states (TX, NM, AZ, CA, NV). They do festivals, corporate events, and some street vending. Revenue about $800K annually.\n\nDo you write food trucks? And if so, what states are you comfortable with? Also, do you have any restrictions on the types of food they serve?\n\nThanks,\nDavid Chen\nMetro Brokers"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Client Placement Question",
+    "receivedDateTime": "2025-08-15T09:52:17Z",
+    "from": {
+      "emailAddress": {
+        "address": "lisa@constructionrisk.com",
+        "name": "Lisa Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>I have a general contractor client that I'm having trouble placing due to their claims history. Here are the details:</p><p style=\"margin-left:20px;\">• Business: Commercial construction, primarily retail and office buildings<br>• Revenue: $12M annually<br>• Claims in last 3 years:<br>  - 2023: $85K property damage claim<br>  - 2022: $125K bodily injury claim<br>  - 2021: $45K property damage claim</p><p>They've implemented new safety protocols and haven't had any claims in the last 18 months. Are you comfortable with this type of risk profile, or is this outside your appetite?</p><p>Thanks,<br>Lisa Thompson<br>Construction Risk Specialists</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Cyber Coverage for Healthcare Provider",
+    "receivedDateTime": "2025-08-28T13:18:33Z",
+    "from": {
+      "emailAddress": {
+        "address": "robert@cyberpro.com",
+        "name": "Robert Wilson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Underwriting,\n\nI have a healthcare client - a small medical practice with 8 doctors and 25 staff. They're looking for cyber liability coverage.\n\nThey handle patient data and are subject to HIPAA. They have basic security measures in place but no formal cybersecurity program.\n\nDo you write cyber for healthcare? What are your minimum requirements? And do you offer any risk management services?\n\nThanks,\nRobert Wilson\nCyberPro Insurance"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Aviation - Crop Duster Coverage",
+    "receivedDateTime": "2025-08-03T15:42:08Z",
+    "from": {
+      "emailAddress": {
+        "address": "mark@aviationrisk.com",
+        "name": "Mark Stevens"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Do you write aviation coverage for agricultural operations? Specifically crop dusting?\n\nClient has 3 planes, 2 pilots, operates in Midwest states. Annual revenue $500K.\n\nMark Stevens\nAviation Risk Specialists"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Good morning. Is this a direct bill policy?",
+    "receivedDateTime": "2025-08-11T08:15:22Z",
+    "from": {
+      "emailAddress": {
+        "address": "j.smith@acmecontracting.com",
+        "name": "John Smith"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Good morning. Is this a direct bill policy?"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Renewal Notice Question",
+    "receivedDateTime": "2025-08-19T14:32:08Z",
+    "from": {
+      "emailAddress": {
+        "address": "m.garcia@sunsetrestaurant.com",
+        "name": "Maria Garcia"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello,</p><p>I received our renewal notice and the premium increased significantly this year. We're a small family restaurant and this is putting a strain on our budget.</p><p>Do you offer any payment plan options? We'd prefer to pay monthly or quarterly if possible.</p><p>Also, could you explain why the premium went up so much? We haven't had any claims.</p><p>Thank you,</p><div style=\"background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #28a745; padding: 15px; margin: 20px 0; border-radius: 0 5px 5px 0;\"><p style=\"font-weight:bold; margin:0; color:#155724; font-size:16px;\">Maria Garcia</p><p style=\"font-size:12px; margin:0; color:#6c757d;\">Owner, Sunset Restaurant</p><hr style=\"border:0; border-top:1px solid #c3e6cb; margin:10px 0;\"><p style=\"margin:0;\"><a href=\"mailto:m.garcia@sunsetrestaurant.com\" style=\"color:#155724; text-decoration:none;\">m.garcia@sunsetrestaurant.com</a></p><p style=\"font-weight:bold; margin:0; color:#495057;\">(505) 555-1234</p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Invoice #INV-2025-8472 - Payment Received",
+    "receivedDateTime": "2025-08-07T11:45:33Z",
+    "from": {
+      "emailAddress": {
+        "address": "accounts@riversideconstruction.com",
+        "name": "Accounts Payable"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThis email confirms that payment for Invoice #INV-2025-8472 in the amount of $12,847.50 has been processed and received on August 7, 2025.\n\nPayment Method: ACH Transfer\nReference Number: ACH-2025-0814\n\nPlease update your records accordingly.\n\nThank you,\nAccounts Payable Department\nRiverside Construction, LLC\n(602) 555-9876"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "why did u charge me twice",
+    "receivedDateTime": "2025-08-25T16:28:41Z",
+    "from": {
+      "emailAddress": {
+        "address": "dave@quickfixplumbing.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "why did u charge me twice for the same policy? i see two charges on my credit card statement. this is bs. fix it now."
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Policy Cancellation Question",
+    "receivedDateTime": "2025-08-13T09:17:55Z",
+    "from": {
+      "emailAddress": {
+        "address": "r.thompson@northshoreproperties.com",
+        "name": "Robert Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Dear Customer Service,</p><p>I'm writing regarding our policy #NS-2025-003 which was cancelled effective July 15, 2025. We paid the annual premium of $8,450.00 in full on January 15, 2025.</p><p>Since the policy was cancelled mid-term, I believe we're entitled to a pro-rated refund for the unused portion of the policy period (approximately 6.5 months).</p><p>Could you please calculate the refund amount and process it? I'd prefer a check mailed to our business address.</p><p>Thank you for your attention to this matter.</p><br><p>Sincerely,</p><p style=\"font-weight:bold; margin:0;\">Robert Thompson</p><p style=\"font-size:12px; margin:0;\">Property Manager</p><p>Northshore Properties<br><a href=\"mailto:r.thompson@northshoreproperties.com\">r.thompson@northshoreproperties.com</a><br>(206) 555-4455</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "can i pay with credit card",
+    "receivedDateTime": "2025-08-30T13:42:19Z",
+    "from": {
+      "emailAddress": {
+        "address": "lisa@smallbiz.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "can i pay with credit card? and do u take amex?"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "URGENT: Need Certificate of Insurance for Contract Deadline",
+    "receivedDateTime": "2025-08-14T09:23:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "l.rodriguez@metroconstruction.com",
+        "name": "Luis Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>We have a <strong style=\"color:#d32f2f;\">URGENT</strong> request for a Certificate of Insurance. We're finalizing a major contract with the City of Phoenix and need to submit proof of coverage by <u>Friday, August 18th</u>.</p><p>Please issue a Certificate of Insurance showing:</p><ul><li>General Liability: $2,000,000 per occurrence</li><li>Workers' Compensation: Statutory limits</li><li>Auto Liability: $1,000,000 per occurrence</li></ul><p>Please send this as soon as possible. This is critical for our business.</p><br><p>Thank you,</p><div style=\"border-top: 3px solid #d32f2f; padding-top: 15px; margin-top: 20px;\"><p style=\"font-size:16px; color:#d32f2f; font-weight:bold; margin:0;\">Luis Rodriguez</p><p style=\"font-size:12px; margin:0; color:#666;\">Contracts Manager</p><p style=\"margin:0;\"><a href=\"mailto:l.rodriguez@metroconstruction.com\" style=\"color:#d32f2f; text-decoration:none;\">l.rodriguez@metroconstruction.com</a></p><p style=\"font-weight:bold; margin:0; color:#333;\">(602) 555-8471</p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Annual Review Documentation",
+    "receivedDateTime": "2025-08-22T16:45:32Z",
+    "from": {
+      "emailAddress": {
+        "address": "sarah.williams@northstarconsulting.com",
+        "name": "Sarah Williams"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello Customer Service Team,\n\nI'm conducting our annual insurance review and need a complete copy of our current policy documents. Could you please provide:\n\n1. Complete policy declarations\n2. All endorsements and riders\n3. Policy forms and conditions\n4. Current premium breakdown\n5. Any recent correspondence\n\nWe're planning to review our coverage with our broker next week, so having these documents would be very helpful.\n\nPlease send via email if possible, or let me know if you need to mail physical copies.\n\nThank you for your assistance.\n\nBest regards,\nSarah Williams\nRisk Management Director\nNorthstar Consulting Group\n(312) 555-2298"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Proof of Insurance Needed for Loan Application",
+    "receivedDateTime": "2025-08-08T11:17:44Z",
+    "from": {
+      "emailAddress": {
+        "address": "mike@riversideauto.com",
+        "name": "Mike Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hi there,</p><p>I'm applying for a business loan and the bank needs proof of insurance for our commercial auto fleet. Can you send me a certificate showing our current coverage?</p><p>They specifically need to see:</p><p style=\"margin-left:20px;\">• Commercial Auto Liability<br>• Physical Damage coverage<br>• Umbrella policy info</p><p>Also, if you could include a letter confirming our policy is active and in good standing, that would be great.</p><p>Thanks!<br>Mike</p><p style=\"font-size:11px; color:#666;\">Riverside Auto Service<br>mike@riversideauto.com</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Missing Endorsement Document",
+    "receivedDateTime": "2025-08-29T14:33:21Z",
+    "from": {
+      "emailAddress": {
+        "address": "jennifer.lee@sunsetproperties.com",
+        "name": "Jennifer Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Insurance Team,\n\nI'm looking for a copy of an endorsement that was processed last month (July 2025) that added Sunset Properties Management LLC as an Additional Insured to our policy.\n\nI can't seem to locate the paperwork, and I need it for our records. Could you please send me a copy of that endorsement?\n\nOur policy number is: SP-2025-001\n\nThank you for your help.\n\nJennifer Lee\nProperty Manager\nSunset Properties\njennifer.lee@sunsetproperties.com\n(305) 555-7766"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Need Insurance Verification Letter ASAP",
+    "receivedDateTime": "2025-08-05T08:52:17Z",
+    "from": {
+      "emailAddress": {
+        "address": "tom@quickfixplumbing.com",
+        "name": "Tom Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hey guys,</p><p>I got a call from a potential client who wants me to start work tomorrow, but they need proof of insurance first. Can you send me something that shows we're covered?</p><p>I need it today if possible. Just something that says we have general liability and workers comp coverage.</p><p>Thanks a lot!<br>Tom</p><br><p style=\"font-size:12px; color:#666;\">Quick Fix Plumbing<br>tom@quickfixplumbing.com<br>(713) 555-4421</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "need proof of insurance",
+    "receivedDateTime": "2025-08-17T22:08:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "bob@quickfixelectrical.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hey,\n\nneed something that shows we have insurance. client wants to see it before we start work tomorrow.\n\njust send whatever u got that proves we're covered.\n\nthx\nbob"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "[ENDORSEMENT] RIVERSTONE PARTNERS 21 LLC - K0047MP118392-00",
+    "receivedDateTime": "2025-08-23T14:37:22Z",
+    "from": {
+      "emailAddress": {
+        "address": "m.turner@harborcoverisk.com",
+        "name": "Michael Turner"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Greetings!</p><p>Please replace/modify the current Additional Insured on the policy to the following:</p><p style=\"margin-left:20px;\">Oakridge Plaza IV, LLC<br>and HorizonPoint Commercial Realty Advisors<br>745 Evergreen Avenue, Suite 310<br>Greenville, NC 27858</p><p>Thank you,</p><p>---</p><!-- Signature block --><div style=\"border-left: 4px solid #0066cc; padding-left: 15px; margin: 20px 0;\"><p style=\"font-size:18px; color:#0066cc; margin:0; font-weight:bold;\">Michael Turner</p><p style=\"text-decoration:underline; margin:0; color:#333;\">Commercial Team</p><p style=\"font-size:12px; font-weight:bold; margin:0; color:#666;\">Customer Service</p><br><p style=\"margin:0;\"><a href=\"mailto:m.turner@harborcoverisk.com\" style=\"color:#0066cc; text-decoration:none;\">m.turner@harborcoverisk.com</a></p><p style=\"font-weight:bold; margin:0; color:#333;\">(407) 892-6412 x 227</p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "[ENDORSEMENT] OAKRIDGE PLAZA IV LLC – M0062HT004512-00",
+    "receivedDateTime": "2025-08-07T09:15:43Z",
+    "from": {
+      "emailAddress": {
+        "address": "k.diaz@midwestbuilders.com",
+        "name": "Karen Diaz"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nPlease update the Certificate Holder on the policy as follows:\n\n   Riverside Construction, LLC\n   2150 Maplewood Drive\n   Springfield, IL 62711\n\nCan you confirm once this has been processed and send me a revised certificate?\n\nBest regards,  \nKaren Diaz  \nRisk Management Assistant  \nMidwest Builders Group"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Waiver of Subrogation Request – Horizon Medical Partners",
+    "receivedDateTime": "2025-08-31T16:22:08Z",
+    "from": {
+      "emailAddress": {
+        "address": "s.peterson@sterlingrisk.com",
+        "name": "Samuel Peterson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good afternoon,</p><p>I need to request an endorsement to add a <strong>Waiver of Subrogation</strong> in favor of the following:</p><p style=\"margin-left:20px;\">Horizon Medical Partners<br>8900 Lakeside Parkway<br>Atlanta, GA 30339</p><p>Please advise if any additional premium will apply and forward the amended policy documents once complete.</p><p>Thank you,</p><div style=\"background-color:#f8f9fa; border:1px solid #dee2e6; border-radius:5px; padding:15px; margin:20px 0;\"><p style=\"font-size:16px; color:#004488; margin:0; font-weight:bold;\">Samuel Peterson</p><p style=\"font-size:12px; margin:0; color:#6c757d;\">Operations Coordinator</p><hr style=\"border:0; border-top:1px solid #dee2e6; margin:10px 0;\"><p style=\"margin:0;\"><a href=\"mailto:s.peterson@sterlingrisk.com\" style=\"color:#004488; text-decoration:none;\">s.peterson@sterlingrisk.com</a></p><p style=\"font-weight:bold; margin:0; color:#495057;\">(770) 555-9210</p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Additional Insured Request",
+    "receivedDateTime": "2025-08-12T11:45:17Z",
+    "from": {
+      "emailAddress": {
+        "address": "j.mills@coastalretail.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Team,\n\nCould you please endorse the policy to include the following as an Additional Insured?\n\n   Coastal Retail Group, LLC\n   451 Bayshore Blvd\n   Tampa, FL 33606\n\nThis is required under our lease agreement with them. Please confirm receipt and estimated turnaround time.\n\nThanks,  \nJonathan Mills\nProperty Manager"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Policy Information Update",
+    "receivedDateTime": "2025-08-03T08:33:55Z",
+    "from": {
+      "emailAddress": {
+        "address": "agr@bluerockservices.com",
+        "name": "Alicia Grant"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Dear Customer Service,</p><p>We noticed an error on our policy documents. The <u>Named Insured</u> is currently listed as:</p><blockquote>\"Blue Rock Services, Inc.\"</blockquote><p>It should read:</p><blockquote>\"Blue Rock Services, LLC\"</blockquote><p>Please issue a correction endorsement reflecting the proper entity name.</p><br><p>Sincerely,</p><p><strong>Alicia Grant</strong><br> Blue Rock Services<br> <a href=\"mailto:agr@bluerockservices.com\">agr@bluerockservices.com</a><br> (410) 775-2331</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Please add new facility in Austin",
+    "receivedDateTime": "2025-08-19T13:28:41Z",
+    "from": {
+      "emailAddress": {
+        "address": "m.thompson@thompsongrey.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nPlease add the following new premises location to our policy, effective 9/1/2025:\n\n   1425 Canyon Ridge Drive\n   Austin, TX 78735\n\nThis will serve as our second distribution facility. Please confirm coverage is in place and let us know if any inspection is required.\n\nKind regards,  \nMelissa Thompson  \nLogistics Coordinator  \nThompson & Grey Supply Co."
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Need to remove sold vehicle from policy",
+    "receivedDateTime": "2025-08-25T10:52:36Z",
+    "from": {
+      "emailAddress": {
+        "address": "d.lopez@atlanticmaintenance.com",
+        "name": "David Lopez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi there,  \n\nWe need to cancel coverage for the vehicle listed under our commercial auto policy:  \n\n   2019 Ford Transit Van  \n   VIN: 1FTYR2CM7KKA12345  \n\nThe vehicle was sold last month. Please process the cancellation endorsement effective 8/15/2025 and send us the updated schedule.  \n\nThanks,  \nDavid Lopez  \nFleet Manager  \nAtlantic Maintenance Services"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Lease requirement – add landlord",
+    "receivedDateTime": "2025-08-15T07:41:19Z",
+    "from": {
+      "emailAddress": {
+        "address": "r.nguyen@clearviewpartners.com",
+        "name": "Rachel Nguyen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Customer Service,</p><p>Per our lease requirements, please endorse the policy to add our landlord as an Additional Insured:</p><p style=\"margin-left:20px;\">Greenhill Property Group, LLC<br>600 Market Street, Suite 2200<br>Philadelphia, PA 19103</p><p>Could you also send a copy of the updated Certificate of Insurance once completed? </p><br><p>Many thanks,</p><p style=\"font-weight:bold; color:#2a2a2a; margin:0;\">Rachel Nguyen</p><p style=\"font-size:12px; margin:0;\">Office Administrator</p><p><a href=\"mailto:r.nguyen@clearviewpartners.com\">r.nguyen@clearviewpartners.com</a> | (215) 660-4889</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "new address for coverage",
+    "receivedDateTime": "2025-08-28T20:14:33Z",
+    "from": {
+      "emailAddress": {
+        "address": "maria@hillcrestproperties.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hi,  \n\npls add my landlord as additional insured:  \nHillcrest Properties LLC  \n28 E Main St  \nNewark NJ 07102  \n\nsend me the cert when done.  \n\nthanks  \nmaria"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "add landlord + send cert",
+    "receivedDateTime": "2025-08-05T18:56:47Z",
+    "from": {
+      "emailAddress": {
+        "address": "chris@willowbrook.com"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "hey,  \n\ncan u guys add my new address to the policy. we moved last week and i dont want there to be any issues if something happens  \n\n317 Willowbrook Ct  \nRaleigh NC 27609  \n\nthx  \n- Chris"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "ISO Code Mapping Issue - Quoting Tool",
+    "receivedDateTime": "2025-08-14T11:25:33Z",
+    "from": {
+      "emailAddress": {
+        "address": "karen@premiumbrokers.com",
+        "name": "Karen Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hello Support Team,</p><p>I'm having trouble with the ISO code mapping in your quoting tool. When I select \"Restaurant\" as the business class, it's showing multiple ISO codes but I can't determine which one applies to my client's specific situation.</p><p>My client operates a food truck that also has a brick-and-mortar location. They do catering, delivery, and have a small dining area. The tool shows codes for:</p><ul><li>Restaurant - No Delivery</li><li>Restaurant - With Delivery</li><li>Mobile Food Service</li><li>Catering Service</li></ul><p>Which ISO code should I use for this hybrid operation? Also, is there documentation available that explains the differences between these classifications?</p><p>Thanks,</p><div style=\"background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%); border:1px solid #2196f3; border-radius:6px; padding:18px; margin:20px 0;\"><p style=\"font-size:16px; color:#1565c0; margin:0; font-weight:bold;\">Karen Martinez</p><p style=\"font-size:12px; margin:0; color:#1976d2; font-weight:500;\">Premium Brokers</p><hr style=\"border:0; border-top:1px solid #90caf9; margin:12px 0;\"><p style=\"margin:0; font-size:11px; color:#424242;\">Technical Support Specialist</p></div></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Policy Form Endorsement Availability",
+    "receivedDateTime": "2025-08-22T15:42:18Z",
+    "from": {
+      "emailAddress": {
+        "address": "mike@constructionrisk.com",
+        "name": "Mike Thompson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI'm working on a construction client and need to know what additional insured endorsements are available for your general liability policy.\n\nSpecifically, I need:\n1. CG 20 10 - Additional Insured - Owners, Lessees or Contractors\n2. CG 20 37 - Additional Insured - Designated Person or Organization\n3. CG 20 38 - Additional Insured - Person or Organization\n\nAre all of these available? And what are the limitations or restrictions on each?\n\nAlso, do you have any specific endorsements for project-specific additional insured status?\n\nThanks,\nMike Thompson\nConstruction Risk Specialists"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Loss Run Dispute",
+    "receivedDateTime": "2025-08-09T09:18:47Z",
+    "from": {
+      "emailAddress": {
+        "address": "lisa@metroinsurance.com",
+        "name": "Lisa Chen"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Good morning,</p><p>I have a client who is disputing some claims that are showing up on their loss runs. They're saying these claims were either settled for different amounts or shouldn't be there at all.</p><p>What's the process for verifying or disputing claims information? Do I need to have the client contact you directly, or can I submit documentation on their behalf?</p><p>Also, how long does it typically take to get a response on claims verification requests?</p><p>Thanks,<br>Lisa Chen<br>Metro Insurance Group</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Quoting Tool Error - Premium Calculation",
+    "receivedDateTime": "2025-08-28T13:55:22Z",
+    "from": {
+      "emailAddress": {
+        "address": "david@northstarins.com",
+        "name": "David Rodriguez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI'm getting an error in your quoting tool when trying to calculate premium for a commercial property policy. The error message says \"Premium calculation failed - contact support.\"\n\nHere's what I'm trying to do:\n- Building: Office building, 15,000 sq ft\n- Construction: Frame with brick veneer\n- Protection: 5 miles from fire station\n- Occupancy: Professional office\n- Coverage: $2M building, $500K contents\n\nI've tried refreshing the page and re-entering the information, but keep getting the same error. Is this a known issue? Can you help me troubleshoot?\n\nThanks,\nDavid Rodriguez\nNorthstar Insurance"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Policy Territory and Coverage Extensions",
+    "receivedDateTime": "2025-08-16T10:33:41Z",
+    "from": {
+      "emailAddress": {
+        "address": "sarah@globalrisk.com",
+        "name": "Sarah Williams"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "html",
+      "content": "<!DOCTYPE html><html><body><p>Hi Support Team,</p><p>I have a client that operates in multiple states and needs clarification on territory coverage.</p><p>Their business operates in:\n- Primary location: California\n- Regular operations: Nevada, Arizona\n- Occasional work: Oregon, Washington</p><p>I see your policy shows \"Worldwide coverage\" but with some exclusions. Can you clarify:</p><ol><li>Are there any specific territory restrictions I should be aware of?</li><li>Do you offer coverage extensions for international operations?</li><li>Are there any special requirements for operations in certain states?</li></ol><p>Also, do you have a territory endorsement that specifically lists covered states?</p><p>Thanks,<br>Sarah Williams<br>Global Risk Solutions</p></body></html>"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Manufacturing Client Requirements",
+    "receivedDateTime": "2025-08-05T16:27:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "robert@safetyfirst.com",
+        "name": "Robert Johnson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI'm working with a manufacturing client and need to understand your loss control requirements and documentation process.\n\nWhat specific loss control measures are required for:\n- Manufacturing operations with 50+ employees\n- Operations involving hazardous materials\n- Facilities with material handling equipment\n\nDo you have checklists or forms that need to be completed? And what's the process for submitting loss control documentation?\n\nAlso, are there any specific training requirements for employees that need to be documented?\n\nThanks,\nRobert Johnson\nSafety First Insurance"
+    },
+    "hasAttachments": false
+  },
+  {
+    "subject": "Refund Request - MOD Pizza",
+    "receivedDateTime": "2025-09-09T15:12:34Z",
+    "from": {
+      "emailAddress": {
+        "address": "john.doe@example.com",
+        "name": "John Doe"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nI was charged for a Mini MOD I did not receive. Please review and refund the charge shown on the attached receipt.\n\nThanks,\nJohn Doe"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-011.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - WinCo Foods",
+    "receivedDateTime": "2025-09-09T15:13:22Z",
+    "from": {
+      "emailAddress": {
+        "address": "sarah.smith@example.com",
+        "name": "Sarah Smith"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi Team,\n\nSome frozen items thawed before I got home due to a bag tear at checkout. Im requesting reimbursement. Receipt attached.\n\nBest,\nSarah"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-002.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Warranty/Refund Request - Walmart (Chesterfield, MO)",
+    "receivedDateTime": "2025-09-09T15:14:10Z",
+    "from": {
+      "emailAddress": {
+        "address": "mike.brown@example.com",
+        "name": "Mike Brown"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThe toothbrush I purchased stopped working within a week. Please advise on warranty replacement or refund. Receipt attached.\n\nRegards,\nMike"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-003.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Walmart (Westminster, CA)",
+    "receivedDateTime": "2025-09-09T15:15:01Z",
+    "from": {
+      "emailAddress": {
+        "address": "anna.wilson@example.com",
+        "name": "Anna Wilson"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was charged for an item I returned at the register. Please issue a refund using the attached receipt as reference.\n\nThanks,\nAnna"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-004.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Walmart (Lake Wales, FL)",
+    "receivedDateTime": "2025-09-09T15:16:20Z",
+    "from": {
+      "emailAddress": {
+        "address": "kevin.lee@example.com",
+        "name": "Kevin Lee"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nOne item (Fiber Choice) was defective. Im requesting reimbursement. See attached receipt.\n\nRegards,\nKevin Lee"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-005.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Surati Farsan Mart",
+    "receivedDateTime": "2025-09-09T15:17:02Z",
+    "from": {
+      "emailAddress": {
+        "address": "meera.patel@example.com",
+        "name": "Meera Patel"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nThe to go Chole Samosa was spoiled when I opened it. Requesting a refund. Receipt attached.\n\nThanks,\nMeera Patel"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-006.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Panda Express",
+    "receivedDateTime": "2025-09-09T15:18:11Z",
+    "from": {
+      "emailAddress": {
+        "address": "linda.martinez@example.com",
+        "name": "Linda Martinez"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Support,\n\nI was double charged for an entre. Please reimburse the extra amount. Receipt attached.\n\nBest regards,\nLinda Martinez"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-007.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Blue Bear Tavern",
+    "receivedDateTime": "2025-09-09T15:19:05Z",
+    "from": {
+      "emailAddress": {
+        "address": "robert.jones@example.com",
+        "name": "Robert Jones"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nThere are charges for drinks I didnt order. Please review and refund. See attached receipt.\n\nSincerely,\nRobert Jones"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-008.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - El Valle Mexican Restaurant",
+    "receivedDateTime": "2025-09-09T15:20:12Z",
+    "from": {
+      "emailAddress": {
+        "address": "carla.green@example.com",
+        "name": "Carla Green"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hi,\n\nI was overcharged for my Lunch Fajitas. Requesting a refund; receipt attached.\n\nThank you,\nCarla Green"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-009.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Refund Request - Lalos Mexican (Navy Pier)",
+    "receivedDateTime": "2025-09-09T15:21:30Z",
+    "from": {
+      "emailAddress": {
+        "address": "steven.harris@example.com",
+        "name": "Steven Harris"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Dear Team,\n\nAn extra taco was charged by mistake. Please refund the difference. Receipt attached.\n\nSincerely,\nSteven Harris"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-010.jpg"
+      }
+    ]
+  },
+  {
+    "subject": "Reimbursement Request - Amici Conyers",
+    "receivedDateTime": "2025-09-09T15:22:15Z",
+    "from": {
+      "emailAddress": {
+        "address": "nina.davis@example.com",
+        "name": "Nina Davis"
+      }
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "emailaisolutions@teamhgs.com",
+          "name": "Email AI Solutions"
+        }
+      }
+    ],
+    "body": {
+      "contentType": "text",
+      "content": "Hello,\n\nMy order was prepared incorrectly and I was charged extra. Requesting reimbursement. Attached is the receipt.\n\nBest,\nNina Davis"
+    },
+    "hasAttachments": true,
+    "attachments": [
+      {
+        "filename": "receipt-001.jpg"
+      }
+    ]
+  }
+]

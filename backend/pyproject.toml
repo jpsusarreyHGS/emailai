@@ -13,6 +13,8 @@ dependencies = [
     "html2text (>=2025.4.15,<2026.0.0)",
     "aihub @ file:./packages/aihub-0.0.1-py3-none-any.whl",
     "pydantic (>=2.11.7,<3.0.0)",
+    "msal (>=1.33.0,<2.0.0)",
+    "requests (>=2.32.5,<3.0.0)",
 ]
 
 
