@@ -22,8 +22,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-001.jpg",
-      "filePath": "/images/receipt-001.jpg"
+      "filename": "receipt-001.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-001/receipt-001.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-001"
@@ -51,8 +58,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-002.jpg",
-      "filePath": "/images/receipt-002.jpg"
+      "filename": "receipt-002.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-002/receipt-002.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-002"
@@ -80,8 +94,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-003.jpg",
-      "filePath": "/images/receipt-003.jpg"
+      "filename": "receipt-003.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-003/receipt-003.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-003"
@@ -109,8 +130,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-004.jpg",
-      "filePath": "/images/receipt-004.jpg"
+      "filename": "receipt-004.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-004/receipt-004.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-004"
@@ -138,8 +166,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-005.jpg",
-      "filePath": "/images/receipt-005.jpg"
+      "filename": "receipt-005.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-005/receipt-005.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-005"
@@ -167,8 +202,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-006.jpg",
-      "filePath": "/images/receipt-006.jpg"
+      "filename": "receipt-006.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-006/receipt-006.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-006"
@@ -196,8 +238,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-007.jpg",
-      "filePath": "/images/receipt-007.jpg"
+      "filename": "receipt-007.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-007/receipt-007.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-007"
@@ -225,8 +274,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-008.jpg",
-      "filePath": "/images/receipt-008.jpg"
+      "filename": "receipt-008.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-008/receipt-008.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-008"
@@ -254,8 +310,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-009.jpg",
-      "filePath": "/images/receipt-009.jpg"
+      "filename": "receipt-009.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-009/receipt-009.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-009"
@@ -283,8 +346,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-010.jpg",
-      "filePath": "/images/receipt-010.jpg"
+      "filename": "receipt-010.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-010/receipt-010.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-010"
@@ -312,8 +382,15 @@
   },
   "attachments": [
     {
-      "fileName": "receipt-011.jpg",
-      "filePath": "/images/receipt-011.jpg"
+      "filename": "receipt-011.jpg",
+      "contentType": "image/jpeg",
+      "blobPath": "receipt-011/receipt-011.jpg",
+      "ocr": {
+        "status": "pending",
+        "text": null,
+        "model": null,
+        "lastUpdated": null
+      }
     }
   ],
   "id": "receipt-011"
