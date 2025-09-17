@@ -216,13 +216,69 @@ def list_inbox_messages(access_token: str, mailbox_upn: Optional[str] = None, to
   params = {
     '$top': str(top),
     '$orderby': 'receivedDateTime DESC',
-    '$select': 'id,subject,receivedDateTime,from,toRecipients,hasAttachments,bodyPreview,internetMessageId'
+    '$select': 'id,subject,receivedDateTime,from,toRecipients,hasAttachments,body'
   }
 
   if unread is True:
     params['$filter'] = 'isRead eq false'
 
   resp = graph_get(endpoint, access_token, params=params)
+  if resp.status_code >= 400:
+    try:
+      data = resp.json()
+    except Exception:
+      data = {'error': resp.text}
+    raise RuntimeError(json.dumps({'status': resp.status_code, 'error': data}))
+
+  return resp.json()
+
+
+def list_message_attachments(access_token: str, message_id: str, mailbox_upn: Optional[str] = None) -> dict:
+  """
+  List attachments for a specific message using Graph v1.0.
+
+  Returns parsed JSON from Graph containing attachment metadata.
+  Note: For file attachments, this returns metadata. To get file content,
+  you'd need to make additional calls to get each attachment individually.
+  """
+  mailbox = mailbox_upn or os.getenv('GRAPH_SHARED_MAILBOX_UPN')
+  if not mailbox:
+    raise ValueError('GRAPH_SHARED_MAILBOX_UPN is not set and no mailbox was provided')
+
+  base_url = 'https://graph.microsoft.com/v1.0'
+  endpoint = f"{base_url}/users/{mailbox}/messages/{message_id}/attachments"
+
+  # Select common attachment fields
+  params = {
+    '$select': 'id,name,contentType,size,lastModifiedDateTime'
+  }
+
+  resp = graph_get(endpoint, access_token, params=params)
+  if resp.status_code >= 400:
+    try:
+      data = resp.json()
+    except Exception:
+      data = {'error': resp.text}
+    raise RuntimeError(json.dumps({'status': resp.status_code, 'error': data}))
+
+  return resp.json()
+
+
+def get_message_attachment_content(access_token: str, message_id: str, attachment_id: str, mailbox_upn: Optional[str] = None) -> dict:
+  """
+  Get the content of a specific attachment using Graph v1.0.
+
+  Returns parsed JSON from Graph containing the full attachment data including content.
+  For file attachments, this includes the base64-encoded content.
+  """
+  mailbox = mailbox_upn or os.getenv('GRAPH_SHARED_MAILBOX_UPN')
+  if not mailbox:
+    raise ValueError('GRAPH_SHARED_MAILBOX_UPN is not set and no mailbox was provided')
+
+  base_url = 'https://graph.microsoft.com/v1.0'
+  endpoint = f"{base_url}/users/{mailbox}/messages/{message_id}/attachments/{attachment_id}"
+
+  resp = graph_get(endpoint, access_token)
   if resp.status_code >= 400:
     try:
       data = resp.json()

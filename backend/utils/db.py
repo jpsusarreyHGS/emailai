@@ -22,6 +22,7 @@ The utilities automatically detect the environment and load configuration approp
 
 import os
 
+import html2text
 from azure.cosmos import CosmosClient
 
 
@@ -196,3 +197,32 @@ def test_connection():
   except Exception as e:
     logging.error(f"CosmosDB connection failed: {e}")
     return False
+
+
+def process_html_content(email_data):
+  """Convert HTML body content to plain text for emails with HTML content type."""
+  h = html2text.HTML2Text()
+  h.ignore_links = False
+  h.ignore_images = True
+  h.body_width = 0  # Don't wrap lines
+
+  html_converted_count = 0
+
+  for email in email_data:
+    if (email.get('body') and
+        email['body'].get('contentType') == 'html' and
+            email['body'].get('content')):
+      try:
+        # Convert HTML to plain text
+        original_content = email['body']['content']
+        plain_text_content = h.handle(original_content).strip()
+        email['body']['content'] = plain_text_content
+        html_converted_count += 1
+      except Exception as e:
+        print(f"⚠️  Failed to convert HTML to text for email: {e}")
+        # Continue with original content if conversion fails
+
+  if html_converted_count > 0:
+    print(f"🔄 Converted {html_converted_count} HTML email(s) to plain text")
+
+  return email_data
