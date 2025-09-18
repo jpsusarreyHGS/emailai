@@ -201,6 +201,8 @@ def test_connection():
 
 def process_html_content(email_data):
   """Convert HTML body content to plain text for emails with HTML content type."""
+  import logging
+
   h = html2text.HTML2Text()
   h.ignore_links = False
   h.ignore_images = True
@@ -219,10 +221,10 @@ def process_html_content(email_data):
         email['body']['content'] = plain_text_content
         html_converted_count += 1
       except Exception as e:
-        print(f"⚠️  Failed to convert HTML to text for email: {e}")
+        logging.warning(f"Failed to convert HTML to text for email: {e}")
         # Continue with original content if conversion fails
 
   if html_converted_count > 0:
-    print(f"🔄 Converted {html_converted_count} HTML email(s) to plain text")
+    logging.info(f"Converted {html_converted_count} HTML email(s) to plain text")
 
   return email_data

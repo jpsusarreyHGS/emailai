@@ -1,9 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./Dashboard.css";
-import EmailList from "../components/EmailList";
-import EmailDetail from "../components/EmailDetail";
 import HgsLogo from "../assets/HgsLogo.svg";
+import EmailDetail from "../components/EmailDetail";
 
 const ROSTER = {
   coach: { id: "coach", name: "Coach View", role: "coach" },
