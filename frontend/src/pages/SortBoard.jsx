@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchEmails } from "../utils/api";
 import "./Dashboard.css";
 
 const ANALYSTS = [
@@ -17,7 +18,8 @@ const SEED_EMAILS = [
     body: "My ZX100 TV screen cracked during installation. Store: BB-0421",
     at: new Date().toISOString(),
     tags: [],
-    assignedTo: null
+    assignedTo: null,
+    hasAttachments: false
   },
   {
     id: "E-1002",
@@ -26,7 +28,8 @@ const SEED_EMAILS = [
     body: "Our kitchen fridge compressor failed. Need warranty service.",
     at: new Date().toISOString(),
     tags: [],
-    assignedTo: null
+    assignedTo: null,
+    hasAttachments: false
   },
   {
     id: "E-1003",
@@ -35,7 +38,8 @@ const SEED_EMAILS = [
     body: "Please review my car insurance claim. Paperwork attached.",
     at: new Date().toISOString(),
     tags: [],
-    assignedTo: null
+    assignedTo: null,
+    hasAttachments: true
   },
   {
     id: "E-1004",
@@ -44,7 +48,8 @@ const SEED_EMAILS = [
     body: "Re-sending clearer receipt for QX55 soundbar purchase.",
     at: new Date().toISOString(),
     tags: [],
-    assignedTo: null
+    assignedTo: null,
+    hasAttachments: true
   },
 ];
 
@@ -70,8 +75,69 @@ function tagAndAssign(email) {
 
 export default function SortBoard() {
   const navigate = useNavigate();
-  const [emails, setEmails] = useState(SEED_EMAILS);
+  const [emails, setEmails] = useState([]);
   const [sortedMode, setSortedMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch emails from backend on component mount
+  useEffect(() => {
+    async function loadIncomingEmails() {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Fetch emails with "new" status for incoming emails
+        const apiEmails = await fetchEmails('new');
+        
+        // Transform backend email format to SortBoard format
+        const transformedEmails = apiEmails.map((email, idx) => {
+          // Handle the emailAddress parsing - it might come as a string representation
+          let fromName = 'Unknown';
+          let fromEmail = 'unknown@example.com';
+          
+          if (email.from?.emailAddress) {
+            if (typeof email.from.emailAddress === 'string') {
+              // Parse string representation like "@{name=Nina Davis; address=nina.davis@example.com}"
+              const nameMatch = email.from.emailAddress.match(/name=([^;]+)/);
+              const emailMatch = email.from.emailAddress.match(/address=([^}]+)/);
+              fromName = nameMatch ? nameMatch[1] : 'Unknown';
+              fromEmail = emailMatch ? emailMatch[1] : 'unknown@example.com';
+            } else {
+              // Handle as object
+              fromName = email.from.emailAddress.name || 'Unknown';
+              fromEmail = email.from.emailAddress.address || 'unknown@example.com';
+            }
+          }
+          
+          return {
+            id: email.id || `E-${idx + 1}`,
+            subject: email.subject || 'No Subject',
+            from: {
+              name: fromName,
+              email: fromEmail
+            },
+            body: email.body?.content || email.body || '',
+            at: email.receivedDateTime || new Date().toISOString(),
+            tags: email.tags || [],
+            assignedTo: null, // Initially unassigned
+            hasAttachments: email.hasAttachments || false
+          };
+        });
+        
+        setEmails(transformedEmails);
+      } catch (err) {
+        console.error('Failed to load emails:', err);
+        setError(err.message);
+        // Fallback to seed emails
+        setEmails(SEED_EMAILS);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadIncomingEmails();
+  }, []);
 
   const inboxEmails = useMemo(() => emails.filter(e => !e.assignedTo), [emails]);
   const byAssignee = useMemo(() => ({
@@ -89,6 +155,47 @@ export default function SortBoard() {
   const handleReset = () => {
     setEmails(prev => prev.map(e => ({ ...e, assignedTo: null, tags: [] })));
     setSortedMode(false);
+  };
+
+  const handleRefreshEmails = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const apiEmails = await fetchEmails('new');
+      const transformedEmails = apiEmails.map((email, idx) => {
+        let fromName = 'Unknown';
+        let fromEmail = 'unknown@example.com';
+        
+        if (email.from?.emailAddress) {
+          if (typeof email.from.emailAddress === 'string') {
+            const nameMatch = email.from.emailAddress.match(/name=([^;]+)/);
+            const emailMatch = email.from.emailAddress.match(/address=([^}]+)/);
+            fromName = nameMatch ? nameMatch[1] : 'Unknown';
+            fromEmail = emailMatch ? emailMatch[1] : 'unknown@example.com';
+          } else {
+            fromName = email.from.emailAddress.name || 'Unknown';
+            fromEmail = email.from.emailAddress.address || 'unknown@example.com';
+          }
+        }
+        
+        return {
+          id: email.id || `E-${idx + 1}`,
+          subject: email.subject || 'No Subject',
+          from: { name: fromName, email: fromEmail },
+          body: email.body?.content || email.body || '',
+          at: email.receivedDateTime || new Date().toISOString(),
+          tags: email.tags || [],
+          assignedTo: null,
+          hasAttachments: email.hasAttachments || false
+        };
+      });
+      setEmails(transformedEmails);
+    } catch (err) {
+      console.error('Failed to refresh emails:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const openBoard = (profileId) => {
@@ -119,18 +226,46 @@ export default function SortBoard() {
       <div className="preboard">
         {/* Inbox column */}
         <section className="inbox">
-          <h2>Incoming Email</h2>
+          <h2>
+            Incoming Email
+            <button 
+              onClick={handleRefreshEmails} 
+              disabled={loading}
+              style={{ 
+                marginLeft: '10px', 
+                fontSize: '12px', 
+                padding: '4px 8px',
+                background: '#1976d2',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.6 : 1
+              }}
+            >
+              {loading ? 'Loading...' : 'Refresh'}
+            </button>
+          </h2>
           <div className="hint">All new emails appear here first.</div>
-          <ul className="list">
-            {inboxEmails.map(e => (
-              <li key={e.id} className="item slide-in">
-                <EmailRow email={e} />
-              </li>
-            ))}
-            {inboxEmails.length === 0 && (
-              <div className="empty">No unassigned emails.</div>
-            )}
-          </ul>
+          {loading ? (
+            <div className="loading">Loading emails...</div>
+          ) : error ? (
+            <div className="error">
+              <p>Error loading emails: {error}</p>
+              <button onClick={() => window.location.reload()}>Retry</button>
+            </div>
+          ) : (
+            <ul className="list">
+              {inboxEmails.map(e => (
+                <li key={e.id} className="item slide-in">
+                  <EmailRow email={e} />
+                </li>
+              ))}
+              {inboxEmails.length === 0 && (
+                <div className="empty">No unassigned emails.</div>
+              )}
+            </ul>
+          )}
           <div style={{ marginTop: 16 }}>
             {!sortedMode ? (
               <button className="btn" onClick={handleFilterSort} style={{ width: "100%" }}>
@@ -191,21 +326,47 @@ export default function SortBoard() {
 
 function EmailRow({ email, compact=false }) {
   return (
-    <div>
-      <div className="title">{email.subject}</div>
-      {!compact && (
-        <div className="sub">
-          {email.from?.name || ""} &lt;{email.from?.email}&gt;
+    <div style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'space-between',
+      width: '100%'
+    }}>
+      <div style={{ flex: 1 }}>
+        <div className="title">{email.subject}</div>
+        {!compact && (
+          <div className="sub">
+            {email.from?.name || ""} &lt;{email.from?.email}&gt;
+          </div>
+        )}
+        <div className="meta-row">
+          <span className="pill time">{new Date(email.at).toLocaleString()}</span>
+          {!!(email.tags && email.tags.length) && (
+            <span className="pill tagline">
+              {email.tags.map((t,i)=><span key={i} className="pill tag">{t}</span>)}
+            </span>
+          )}
+        </div>
+      </div>
+      {email.hasAttachments && (
+        <div style={{
+          marginLeft: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <img 
+            src="/paperclip-icon.png"
+            alt="Has attachments"
+            title="Has attachments"
+            style={{ 
+              width: '24px',
+              height: '24px',
+              opacity: 0.7
+            }}
+          />
         </div>
       )}
-      <div className="meta-row">
-        <span className="pill time">{new Date(email.at).toLocaleString()}</span>
-        {!!(email.tags && email.tags.length) && (
-          <span className="pill tagline">
-            {email.tags.map((t,i)=><span key={i} className="pill tag">{t}</span>)}
-          </span>
-        )}
-      </div>
     </div>
   );
 }
