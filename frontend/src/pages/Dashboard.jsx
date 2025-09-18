@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import HgsLogo from "../assets/HgsLogo.svg";
 import EmailDetail from "../components/EmailDetail";
-import EmailList from "../components/EmailList";
-import "./Dashboard.css";
 
 const ROSTER = {
   coach: { id: "coach", name: "Coach View", role: "coach" },
@@ -44,10 +43,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  // Selected profile comes from SortBoard; default to Coach if missing.
   const selectedProfile = state?.profile || ROSTER.coach;
 
-  // Use emails passed from SortBoard; else fallback seeds.
   const seedEmails = useMemo(() => {
     if (Array.isArray(state?.emails) && state.emails.length) {
       return state.emails.map((e, idx) => ({
@@ -67,14 +64,10 @@ export default function Dashboard() {
     return DEFAULT_EMAILS;
   }, [state]);
 
-  // Incoming emails (clicking creates tickets)
   const [incomingEmails, setIncomingEmails] = useState(seedEmails);
-
-  // Tickets exist separately
   const [tickets, setTickets] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  // Filter by profile (Coach sees all; analysts see only theirs)
   const visibleIncoming = useMemo(() => {
     if (selectedProfile.role === "coach") return incomingEmails;
     return incomingEmails.filter(e => e.assignee?.id === selectedProfile.id);
@@ -119,7 +112,7 @@ export default function Dashboard() {
         model,
         storeNumber: em.body?.match(/BB-\d{4}/)?.[0] || "—",
       },
-      scores: defaultScores, // 0–100 percentages
+      scores: defaultScores,
       validation: { status: "pass", rules_passed: ["merchant_known"], rules_failed: [] },
       draft_reply: {
         template: "approve",
@@ -146,7 +139,7 @@ export default function Dashboard() {
       if (prev.find(x => x.ingestionKey === t.ingestionKey)) return prev;
       return [t, ...prev];
     });
-    setIncomingEmails(prev => prev.filter(e => e.id !== em.id)); // consume from Incoming
+    setIncomingEmails(prev => prev.filter(e => e.id !== em.id));
     setSelected(t);
   };
 
@@ -165,7 +158,7 @@ export default function Dashboard() {
     setTickets(prev =>
       prev.map(t => t.id === ticketId ? { ...t, status: "sent", draft_reply: { ...t.draft_reply, body: draftBody } } : t)
     );
-    setSelected(null); // back to lanes
+    setSelected(null);
   };
 
   const handleSimulateReply = (ticketId) => {
@@ -187,7 +180,6 @@ export default function Dashboard() {
 
   const handleBackHome = () => setSelected(null);
 
-  // Dynamic header bits
   const viewTitle =
     selectedProfile.id === "coach"
       ? "Coach View"
@@ -200,10 +192,9 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      {/* Header with dynamic title + back button */}
       <div className="header">
         <div className="brand">
-          <div className="logo"></div>
+          <img className="logo" src={HgsLogo} alt="EmailAI logo" />
           <div>
             <div className="title">{viewTitle}</div>
             <div className="subtitle">{roleSubtitle}</div>
@@ -216,7 +207,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Lanes or Detail */}
       {!selected ? (
         <div className="board">
           <section className="column">
