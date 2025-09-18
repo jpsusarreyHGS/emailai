@@ -1,3 +1,4 @@
+#backend\functions\prompts\ocr.py
 OCR_SYSTEM_PROMPT = """
 You are an OCR assistant. 
 Your task is to carefully extract **all readable text** from the provided image bytes.

@@ -2,7 +2,6 @@ import os
 import tempfile
 from aihub import LLMInterface
 
-
 class OCRClient:
     """OCR client using AIHub's Azure OpenAI integration via LLMInterface."""
 
@@ -21,15 +20,23 @@ class OCRClient:
         """
         Save bytes to a temporary file and run OCR using LLMInterface.
         """
-        with tempfile.NamedTemporaryFile(delete=True, suffix=".png") as tmp:
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        try:
             tmp.write(image_bytes)
             tmp.flush()
+            tmp.close()  
 
             prompt = (
                 "Extract the exact text from the following image. "
                 f"Image path: {tmp.name}"
             )
 
-            response = self.llm.generate(prompt=prompt)
+            response = self.llm.generate(prompt=prompt, images=[tmp.name])
 
             return response if isinstance(response, str) else str(response)
+
+        finally:
+            try:
+                os.remove(tmp.name)
+            except Exception:
+                pass
