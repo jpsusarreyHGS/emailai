@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dashboard.css";
+import HgsLogo from "../assets/HgsLogo.svg";
 
 const PEOPLE = [
   { id: "coach",  name: "Coach View", role: "coach",  expertise: ["All"] },
@@ -13,9 +14,9 @@ export default function ProfileGate({ onSelect }) {
     <div className="gate">
       <div className="header">
         <div className="brand">
-          <div className="logo"></div>
+          <img className="logo" src={HgsLogo} alt="EmailAI logo" />
           <div>
-            <div className="title">Warranty CRM</div>
+            <div className="title">EmailAI</div>
             <div className="subtitle">Select a profile to continue</div>
           </div>
         </div>

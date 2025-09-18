@@ -3,9 +3,12 @@ import json
 import logging
 
 import azure.functions as func
-from functions.ocr import ocr_attachments       
+from functions.ocr import ocr_attachments
 from functions.categorize import categorize_emails
-from functions.emails import get_emails_by_status
+from functions.emails import get_emails_by_status, ingest_emails
+from functions.graph import graph_connect
+from functions.inbox import read_inbox, seed_inbox_from_file
+
 
 app = func.FunctionApp()
 
@@ -37,6 +40,12 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
 def Emails(req: func.HttpRequest) -> func.HttpResponse:
     """Endpoint to get emails, optionally filtered by status."""
     return get_emails_by_status(req)
+
+
+@app.route(route="emails/ingest", auth_level=func.AuthLevel.FUNCTION, methods=["POST"])
+def EmailsIngest(req: func.HttpRequest) -> func.HttpResponse:
+  """Endpoint to ingest unread emails using from Outlook inbox."""
+  return ingest_emails(req)
 
 
 @app.route(route="emails/categorize", auth_level=func.AuthLevel.FUNCTION, methods=["POST"])

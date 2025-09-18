@@ -6,31 +6,73 @@ import azure.functions as func
 from aihub import LLMInterface
 from functions.prompts.categorize import CATEGORIZE_EMAILS_SYSTEM_PROMPT
 from pydantic import BaseModel
-from utils.db import query_container, upsert_item
+from utils.db import bulk_upsert_items, query_container
+
+AGENTS = {
+    "agent_001": {
+        "name": "Coach Gerver",
+        "skills": ["insurance.endorsement", "insurance.docRequest"]
+    },
+    "agent_002": {
+        "name": "Alice Thompson",
+        "skills": ["insurance.appetite", "insurance.billing"]
+    },
+    "agent_003": {
+        "name": "Bob Hernandez",
+        "skills": ["consumer.receipt"]
+    },
+    "agent_004": {
+        "name": "Cara Park",
+        "skills": ["insurance.underwriting"]
+    }
+}
+
+
+def assign_agent(labels: Dict[str, str]) -> str:
+  """
+  Assign an agent based on the email labels.
+
+  Args:
+    labels: Dictionary with 'industry' and 'category' labels
+
+  Returns:
+    Agent ID for the agent that handles this type of email
+  """
+  # Create the skill string from labels
+  skill_needed = f"{labels['industry']}.{labels['category']}"
+
+  # Find the agent with this skill
+  for agent_id, agent_data in AGENTS.items():
+    if skill_needed in agent_data['skills']:
+      return agent_id
+
+  # If no agent found, log warning and return None (should not happen with current setup)
+  logging.warning(f'No agent found for skill: {skill_needed}')
+  return None
 
 
 def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
   """
-  Categorize all emails with 'new' status using LLM and update their status and labels.
+  Categorize all emails with 'new' status using LLM and assign them to agents.
 
   This function will:
-  1. Get all emails with status 'new'
+  1. Get all emails with status 'new' from emails-content container
   2. For each email, use LLM to determine industry and category labels
-  3. Update the email status to 'categorized' in emails-status container
-  4. Add a 'labels' field with industry and category to the status record
-  5. Return the results of the categorization process
+  3. Assign the email to an agent based on the labels
+  4. Update the email status to 'categorized' and add labels and assigned agent in emails-content container
+  5. Return the results of the categorization and assignment process
   """
   try:
-    logging.info('Starting email categorization process for all new emails')
+    logging.info('Starting email categorization and agent assignment process for all new emails')
 
-    # Step 1: Query emails-status for all records with status = 'new'
-    status_query = "SELECT c.id FROM c WHERE c.status = 'new'"
-    new_status_records = query_container('emails-status', status_query)
+    # Step 1: Query emails-content for all records with status = 'new'
+    content_query = "SELECT * FROM c WHERE c.status = 'new'"
+    emails_to_categorize = query_container('emails-content', content_query)
 
-    logging.info(f'Found {len(new_status_records)} emails with new status')
+    logging.info(f'Found {len(emails_to_categorize)} emails with new status')
 
     # If no emails with 'new' status, return early
-    if not new_status_records:
+    if not emails_to_categorize:
       logging.info('No emails with new status found, nothing to categorize')
       return func.HttpResponse(
           json.dumps({
@@ -41,25 +83,10 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
           mimetype="application/json"
       )
 
-    # Step 2: Extract email IDs from status records
-    email_ids = [record['id'] for record in new_status_records]
-
-    # Step 3: Query emails-content for corresponding emails
-    # Create a parameterized query to avoid SQL injection
-    id_placeholders = ', '.join([f'@id{i}' for i in range(len(email_ids))])
-    content_query = f"SELECT c.id, c.subject, c.body FROM c WHERE c.id IN ({id_placeholders})"
-
-    # Create parameters for the query
-    parameters = [{"name": f"@id{i}", "value": email_id} for i, email_id in enumerate(email_ids)]
-
-    # Execute the query
-    emails_to_categorize = query_container('emails-content', content_query, parameters)
-
-    logging.info(f'Retrieved {len(emails_to_categorize)} email contents for categorization')
-
-    # Step 4: For each email, make LLM call to determine labels and update status
+    # Step 2: For each email, make LLM call to determine labels and update status
     categorization_results = []
     failed_categorizations = []
+    emails_to_update = []  # Collect all email updates for bulk upsert
 
     for email in emails_to_categorize:
       try:
@@ -69,23 +96,27 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
         # Get labels from LLM
         labels = llm_categorize(email)
 
-        # Update the status record with new status and labels
-        status_update = {
-          "id": email_id,
-          "status": "categorized",
-          "labels": labels
-        }
+        # Assign agent based on labels
+        assigned_agent = assign_agent(labels)
 
-        # Update the status in the database
-        upsert_item('emails-status', status_update)
+        # Update the email record with new status, labels, and assigned agent (preserve all existing fields)
+        email_update = email.copy()  # Start with all existing fields
+        email_update["status"] = "categorized"  # Update status
+        email_update["labels"] = labels  # Add labels
+        email_update["assigned_agent"] = assigned_agent  # Add assigned agent
+
+        # Add to bulk update list
+        emails_to_update.append(email_update)
 
         categorization_results.append({
           "email_id": email_id,
           "labels": labels,
+          "assigned_agent": assigned_agent,
           "success": True
         })
 
-        logging.info(f'Successfully categorized email {email_id}: {labels}')
+        logging.info(
+          f'Successfully categorized email {email_id}: {labels}, assigned to {assigned_agent}')
 
       except Exception as e:
         logging.error(f'Failed to categorize email {email.get("id", "unknown")}: {str(e)}')
@@ -95,7 +126,13 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
           "success": False
         })
 
-    # Step 5: Return categorization results
+    # Bulk update all categorized emails in the database
+    if emails_to_update:
+      logging.info(f'Bulk updating {len(emails_to_update)} categorized emails in database')
+      bulk_upsert_items('emails-content', emails_to_update)
+      logging.info('Bulk update completed successfully')
+
+    # Step 3: Return categorization results
     total_processed = len(categorization_results) + len(failed_categorizations)
 
     logging.info(
@@ -133,7 +170,7 @@ def llm_categorize(email: Dict[str, Any]) -> Dict[str, str]:
   Returns:
     Dictionary with 'industry' and 'category' labels
   """
-  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}'
+  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}\n\nhasAttachments: {email['hasAttachments']}'
 
   class CategoryOutput(BaseModel):
     industry: Literal['insurance', 'consumer']
