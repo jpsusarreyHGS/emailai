@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HgsLogo from "../assets/HgsLogo.svg";
+import PaperclipIcon from "../assets/paperclip-icon.png";
 import { fetchEmails } from "../utils/api";
 import "./Dashboard.css";
-import HgsLogo from "../assets/HgsLogo.svg";
 
 const ANALYSTS = [
   { id: "coach", name: "Coach", role: "coach", tags: ["All"] },
@@ -354,7 +355,7 @@ function EmailRow({ email, compact=false }) {
           justifyContent: 'center'
         }}>
           <img 
-            src="/paperclip-icon.png"
+            src={PaperclipIcon}
             alt="Has attachments"
             title="Has attachments"
             style={{ 
