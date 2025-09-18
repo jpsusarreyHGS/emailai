@@ -35,9 +35,13 @@ body{
 .header{ display:flex; align-items:center; justify-content:space-between; }
 .brand{ display:flex; align-items:center; gap:14px; }
 .logo{
-  width:42px; height:42px; border-radius:12px;
-  background: linear-gradient(135deg,#1ea9ff,#8b5cf6);
-  box-shadow: 0 8px 22px rgba(30,169,255,.28);
+  height: 42px;      /* try 48px or 56px if you want it larger */
+  width: auto;       
+  background: none;
+  box-shadow: none;
+  display: block;
+  object-fit: contain; 
+  border-radius: 0;   
 }
 .title{ font-size: 1.35rem; font-weight: 800; color:#f8fafc; }
 .subtitle{ color:var(--muted); font-size: .95rem; }

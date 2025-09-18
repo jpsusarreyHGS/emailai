@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
+import HgsLogo from "../assets/HgsLogo.svg";
 
 const ANALYSTS = [
   { id: "coach", name: "Coach", role: "coach", tags: ["All"] },
@@ -93,7 +94,6 @@ export default function SortBoard() {
 
   const openBoard = (profileId) => {
     const p = ANALYSTS.find(a => a.id === profileId) || ANALYSTS[0];
-    // Navigate to your previous 3-column board and pass profile + current emails
     navigate("/board", { state: { profile: { id: p.id, name: p.name, role: p.role }, emails } });
   };
 
@@ -101,9 +101,9 @@ export default function SortBoard() {
     <div className="dashboard">
       <div className="header">
         <div className="brand">
-          <div className="logo"></div>
+          <img className="logo" src={HgsLogo} alt="EmailAI logo" />
           <div>
-            <div className="title">Warranty CRM</div>
+            <div className="title">EmailAI</div>
             <div className="subtitle">Inbox → Filter/Sort → Pick a profile to open the board</div>
           </div>
         </div>
@@ -117,7 +117,6 @@ export default function SortBoard() {
       </div>
 
       <div className="preboard">
-        {/* Inbox column */}
         <section className="inbox">
           <h2>Incoming Email</h2>
           <div className="hint">All new emails appear here first.</div>
@@ -144,7 +143,6 @@ export default function SortBoard() {
           </div>
         </section>
 
-        {/* 2×2 profile tiles */}
         <section className="profiles-grid">
           {ANALYSTS.map(p => (
             <div key={p.id} className="profile-card">
