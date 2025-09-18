@@ -16,11 +16,10 @@ existing policies, new policies, company policies, document requests, and techni
 associated software, among others.
 
 2. Consumer Goods (industry: consumer)
-This client is a manufacturer that produces consumer goods, that are then sold
-in large retail stores. This client receives emails from customers who have already purchased
-their products, and have questions related to the purchase. Specifically, this inbox receives 
-emails with attached images of receipts/proof of purchase, that agents must then validate as
-legitimate and within warranty before responding.
+This client deals directly with retail customers in stores and food service.
+This client receives emails from customers who have already purchased their products or services
+and have questions related to the purchase. Specifically, this inbox receives emails with attached
+images of receipts/proof of purchase, that agents must then validate as legitimate.
 
 ### Categories
 The categories under the insurance industry are as follows:
@@ -57,11 +56,13 @@ The categories under the consumer industry are as follows:
 
 1. Proof of Purchase Validation (category: receipt)
 These emails provide images of receipts providing proof of purchase for a retail transaction. If
-the email has an image attached, it is in this category. The content of the email itself, unless
-wildly inappropriate for this category, matter less than the presence of an attached image.
+the email has attachment, it is in this category. If there is an attachment, classify the email in
+this category irrespective of the body content. If it does have an attachment, it should not be in
+this category.
 
 ### Input Format
-You will receive the email contents under the 'Email Content' header, separated by subject, body, and attachment file name. If no attachment file name is provided, the email has no attachment.
+You will receive the email contents under the 'Email Content' header, separated by subject, body, a
+hasAttachments boolean (true if the email has an attachment, false otherwise).
 
 ### Output Format
 Provide an 'industry' and 'category' for the email, as accurately as you can determine. You must
