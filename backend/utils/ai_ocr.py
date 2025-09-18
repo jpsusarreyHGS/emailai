@@ -2,6 +2,7 @@ import os
 import tempfile
 from aihub import LLMInterface
 
+
 class OCRClient:
     """OCR client using AIHub's Azure OpenAI integration via LLMInterface."""
 
@@ -31,6 +32,7 @@ class OCRClient:
                 f"Image path: {tmp.name}"
             )
 
+            
             response = self.llm.generate(prompt=prompt, images=[tmp.name])
 
             return response if isinstance(response, str) else str(response)

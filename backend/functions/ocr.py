@@ -1,4 +1,3 @@
-# backend/functions/ocr.py
 import json
 import logging
 import azure.functions as func
@@ -6,7 +5,6 @@ import azure.functions as func
 from utils.db import query_container, upsert_item
 from utils.blob import download_blob_bytes
 from utils.ai_ocr import OCRClient
-from functions.prompts.ocr import OCR_SYSTEM_PROMPT
 
 
 def ocr_attachments(req: func.HttpRequest) -> func.HttpResponse:
@@ -20,8 +18,8 @@ def ocr_attachments(req: func.HttpRequest) -> func.HttpResponse:
 
         logging.info(f"Starting OCR for email {email_id}")
 
-        # Step 1: Get email content doc (attachments live here)
-        query = "SELECT * FROM c WHERE c.id=@id"
+        # Step 1: Get email content doc
+        query = "SELECT * FROM c WHERE c.id = @id"
         params = [{"name": "@id", "value": email_id}]
         items = query_container("emails-content", query, params)
 
@@ -46,7 +44,7 @@ def ocr_attachments(req: func.HttpRequest) -> func.HttpResponse:
 
         # Step 2: Process each attachment
         for att in attachments:
-            ref = att.get("blobPath") or att.get("blobUrl") or att.get("filename")
+            ref = att.get("blobPath") or att.get("filename")
             try:
                 blob_bytes = download_blob_bytes(ref)
                 text = client.extract_text_from_image_bytes(blob_bytes)
@@ -61,7 +59,10 @@ def ocr_attachments(req: func.HttpRequest) -> func.HttpResponse:
             except Exception as e:
                 logging.error(f"OCR failed for {att.get('filename')}: {str(e)}")
                 att.setdefault("ocr", {})
-                att["ocr"].update({"status": "failed", "error": str(e)})
+                att["ocr"].update({
+                    "status": "failed",
+                    "error": str(e)
+                })
                 results.append({"filename": att.get("filename"), "status": "failed"})
 
         # Step 3: Save updates
@@ -80,7 +81,7 @@ def ocr_attachments(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"OCR error: {str(e)}")
         return func.HttpResponse(
-            json.dumps({"error": "OCR failed"}),
+            json.dumps({"error": "OCR failed", "details": str(e)}),
             status_code=500,
             mimetype="application/json"
         )
