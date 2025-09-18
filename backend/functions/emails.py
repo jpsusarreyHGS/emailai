@@ -44,7 +44,12 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             json.dumps({"error": f"Invalid status. Supported statuses: {', '.join(valid_statuses)}"}),
             status_code=400,
-            mimetype="application/json"
+            mimetype="application/json",
+            headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+                }
         )
 
       # Query emails-content directly for records with the specified status
@@ -58,7 +63,12 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
       return func.HttpResponse(
           json.dumps({"emails": email_contents, "status_filter": status}),
           status_code=200,
-          mimetype="application/json"
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
       )
 
     else:
@@ -74,7 +84,12 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
       return func.HttpResponse(
           json.dumps({"emails": email_contents, "status_filter": None}),
           status_code=200,
-          mimetype="application/json"
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
       )
 
   except Exception as e:
@@ -82,7 +97,12 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps({"error": "Failed to retrieve emails"}),
         status_code=500,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+          }
     )
 
 
