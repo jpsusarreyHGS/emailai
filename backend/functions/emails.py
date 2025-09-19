@@ -127,7 +127,12 @@ def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
       return func.HttpResponse(
           json.dumps({"error": "unauthenticated", "authUrl": auth_url}),
           status_code=401,
-          mimetype="application/json"
+          mimetype="application/json",
+          headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+              }
       )
 
     logging.info('Fetching unread emails from Outlook inbox')
@@ -262,7 +267,12 @@ def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
             "count": len(processed_emails)
         }),
         status_code=200,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+            }
     )
 
   except Exception as e:
@@ -270,5 +280,10 @@ def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps({"error": "failed_to_ingest_emails", "details": str(e)}),
         status_code=500,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+            }
     )
