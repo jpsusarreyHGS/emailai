@@ -13,3 +13,29 @@ export async function fetchEmails(status = null) {
   const data = await response.json();
   return data.emails || [];
 }
+
+export async function categorizeEmails() {
+  const response = await fetch(`${API_BASE_URL}/emails/categorize`, {
+    method: 'POST',
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to categorize emails: ${response.statusText}`);
+  }
+  
+  const data = await response.json();
+  return data;
+}
+
+export async function ingestEmails() {
+  const response = await fetch(`${API_BASE_URL}/emails/ingest`, {
+    method: 'POST',
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to ingest emails: ${response.statusText}`);
+  }
+  
+  const data = await response.json();
+  return data;
+}
