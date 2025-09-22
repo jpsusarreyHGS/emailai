@@ -188,6 +188,91 @@ def get_emails_by_assigned_agent(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
+def get_emails_by_id(req: func.HttpRequest) -> func.HttpResponse:
+  """
+  Get a specific email from emails-content based on its id.
+
+  This function will:
+  1. Get id parameter from request (query param or body)
+  2. Query emails-content container for the item with that id
+  3. Return the email content as JSON
+
+  Parameters:
+  - id (required): The unique identifier of the email to retrieve.
+  """
+  try:
+    # Get id parameter from query string or request body
+    email_id = req.params.get('id')
+    if not email_id:
+      try:
+        req_body = req.get_json()
+        if req_body:
+          email_id = req_body.get('id')
+      except ValueError:
+        pass
+
+    if not email_id:
+      return func.HttpResponse(
+          json.dumps({"error": "id parameter is required"}),
+          status_code=400,
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
+      )
+
+    logging.info(f'Getting email with id: {email_id}')
+
+    # Query emails-content directly for the record with the specified id
+    content_query = "SELECT * FROM c WHERE c.id = @id"
+    parameters = [{"name": "@id", "value": email_id}]
+    email_contents = query_container('emails-content', content_query, parameters)
+
+    if not email_contents:
+      logging.info(f'No email found with id: {email_id}')
+      return func.HttpResponse(
+          json.dumps({"error": f"No email found with id: {email_id}"}),
+          status_code=404,
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
+      )
+
+    # Since id should be unique, return the first (and should be only) result
+    email = email_contents[0]
+    logging.info(f'Successfully retrieved email with id: {email_id}')
+
+    # Return the single email
+    return func.HttpResponse(
+        json.dumps({"email": email}),
+        status_code=200,
+        mimetype="application/json",
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+        }
+    )
+
+  except Exception as e:
+    logging.error(f"Error retrieving email by id: {str(e)}")
+    return func.HttpResponse(
+        json.dumps({"error": "Failed to retrieve email by id"}),
+        status_code=500,
+        mimetype="application/json",
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+          }
+    )
+
+
 def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
   """
   Ingest unread emails from Outlook inbox via Microsoft Graph.

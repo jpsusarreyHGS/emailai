@@ -4,7 +4,7 @@ import logging
 
 import azure.functions as func
 from functions.categorize import categorize_emails
-from functions.emails import (get_emails_by_assigned_agent,
+from functions.emails import (get_emails_by_assigned_agent, get_emails_by_id,
                               get_emails_by_status, ingest_emails)
 from functions.graph import graph_connect
 from functions.inbox import read_inbox, seed_inbox_from_file
@@ -38,9 +38,23 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="emails", auth_level=func.AuthLevel.FUNCTION, methods=["GET"])
 def Emails(req: func.HttpRequest) -> func.HttpResponse:
-  """Endpoint to get emails, optionally filtered by status or assigned_agent."""
+  """Endpoint to get emails, optionally filtered by id, assigned_agent, or status."""
 
-  # Check for assigned_agent parameter first (from query string or body)
+  # Check for id parameter first (from query string or body) - most specific
+  email_id = req.params.get('id')
+  if not email_id:
+    try:
+      req_body = req.get_json()
+      if req_body:
+        email_id = req_body.get('id')
+    except ValueError:
+      pass
+
+  # If id parameter is provided, use the id function
+  if email_id:
+    return get_emails_by_id(req)
+
+  # Check for assigned_agent parameter (from query string or body)
   assigned_agent = req.params.get('assigned_agent')
   if not assigned_agent:
     try:
