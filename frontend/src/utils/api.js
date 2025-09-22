@@ -14,6 +14,18 @@ export async function fetchEmails(status = null) {
   return data.emails || [];
 }
 
+export async function fetchEmailsByAgent(assignedAgent) {
+  const url = `${API_BASE_URL}/emails?assigned_agent=${assignedAgent}`;
+  
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch emails for agent: ${response.statusText}`);
+  }
+  
+  const data = await response.json();
+  return data.emails || [];
+}
+
 export async function categorizeEmails() {
   const response = await fetch(`${API_BASE_URL}/emails/categorize`, {
     method: 'POST',

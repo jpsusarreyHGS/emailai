@@ -64,25 +64,6 @@ const SEED_EMAILS = [
   },
 ];
 
-function tagAndAssign(email) {
-  const text = `${email.subject} ${email.body}`.toLowerCase();
-  const tags = [];
-  if (/\b(tv|display|screen|zx100)\b/.test(text)) tags.push("TV/Screen");
-  if (/\b(appliance|fridge|kitchen)\b/.test(text)) tags.push("Appliance");
-  if (/\bwarranty\b/.test(text)) tags.push("Warranty");
-  if (/\b(car|insurance)\b/.test(text)) tags.push("Car/Insurance");
-
-  const scores = [
-    { id: "alice", hits: +( /tv|display|screen|zx100/.test(text) ) },
-    { id: "bob",   hits: +( /appliance|fridge|kitchen|warranty/.test(text) ) },
-    { id: "cara",  hits: +( /car|insurance/.test(text) ) }
-  ].sort((a,b)=>b.hits-a.hits);
-
-  const best = scores[0];
-  const assignedTo = best && best.hits > 0 ? best.id : null;
-
-  return { ...email, tags, assignedTo };
-}
 
 export default function SortBoard() {
   const navigate = useNavigate();
