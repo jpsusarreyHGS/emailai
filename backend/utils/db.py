@@ -20,6 +20,7 @@ Environment configurations:
 The utilities automatically detect the environment and load configuration appropriately.
 """
 
+import logging
 import os
 
 import html2text
@@ -65,6 +66,12 @@ def get_cosmos_client():
       env_context = "local .env file"
     raise ValueError(f"COSMOS_CONNECTION_STRING environment variable not set. "
                      f"Please configure it in {env_context}")
+
+  # Configure logging to reduce Azure SDK verbosity
+  # Suppress detailed HTTP request/response logging from Azure SDK
+  logging.getLogger('azure.core.pipeline.policies.http_logging_policy').setLevel(logging.WARNING)
+  logging.getLogger('azure.cosmos').setLevel(logging.WARNING)
+
   return CosmosClient.from_connection_string(connection_string)
 
 
