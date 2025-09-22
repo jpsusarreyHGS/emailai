@@ -106,6 +106,88 @@ def get_emails_by_status(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
+def get_emails_by_assigned_agent(req: func.HttpRequest) -> func.HttpResponse:
+  """
+  Get emails from emails-content based on their assigned_agent.
+
+  This function will:
+  1. Get assigned_agent parameter from request (query param or body)
+  2. If assigned_agent provided: Query emails-content container for items with that assigned_agent
+  3. If no assigned_agent provided: Get all emails from emails-content
+  4. Return the email content as JSON
+
+  Parameters:
+  - assigned_agent (optional): Filter emails by this assigned_agent. 
+                              If not provided, returns all emails.
+  """
+  try:
+    # Get assigned_agent parameter from query string or request body
+    assigned_agent = req.params.get('assigned_agent')
+    if not assigned_agent:
+      try:
+        req_body = req.get_json()
+        if req_body:
+          assigned_agent = req_body.get('assigned_agent')
+      except ValueError:
+        pass
+
+    if assigned_agent:
+      logging.info(f'Getting emails with assigned_agent: {assigned_agent}')
+
+      # Query emails-content directly for records with the specified assigned_agent
+      content_query = "SELECT * FROM c WHERE c.assigned_agent = @assigned_agent"
+      parameters = [{"name": "@assigned_agent", "value": assigned_agent}]
+      email_contents = query_container('emails-content', content_query, parameters)
+
+      logging.info(f'Found {len(email_contents)} emails with assigned_agent: {assigned_agent}')
+
+      # Return filtered results
+      return func.HttpResponse(
+          json.dumps({"emails": email_contents, "assigned_agent_filter": assigned_agent}),
+          status_code=200,
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
+      )
+
+    else:
+      logging.info('Getting all emails (no assigned_agent filter)')
+
+      # No assigned_agent filter - get all emails from emails-content
+      content_query = "SELECT * FROM c"
+      email_contents = query_container('emails-content', content_query)
+
+      logging.info(f'Retrieved {len(email_contents)} total emails')
+
+      # Return all emails
+      return func.HttpResponse(
+          json.dumps({"emails": email_contents, "assigned_agent_filter": None}),
+          status_code=200,
+          mimetype="application/json",
+          headers={
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type"
+          }
+      )
+
+  except Exception as e:
+    logging.error(f"Error retrieving emails by assigned_agent: {str(e)}")
+    return func.HttpResponse(
+        json.dumps({"error": "Failed to retrieve emails by assigned_agent"}),
+        status_code=500,
+        mimetype="application/json",
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+          }
+    )
+
+
 def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
   """
   Ingest unread emails from Outlook inbox via Microsoft Graph.
