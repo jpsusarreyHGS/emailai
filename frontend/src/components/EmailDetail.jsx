@@ -10,7 +10,7 @@ function scoreClassByPercent(v) {
 
 const API_BASE = "http://localhost:7071/api";
 
-export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply, onRefresh }) {
+export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply, onRefresh, sending }) {
   const [draft, setDraft] = useState(ticket?.draft_reply?.body || "");
   const [edits] = useState({}); // extracted fields are read-only now
   const [isGenerating, setIsGenerating] = useState(false);
@@ -249,8 +249,16 @@ export default function EmailDetail({ ticket, onSave, onSend, onBack, onSimReply
                   <button className="btn gray" onClick={() => onSave(ticket.id, draft)}>
                     Save
                   </button>
-                  <button className="btn" onClick={() => onSend(ticket.id, draft)}>
-                    Send
+                  <button 
+                    className="btn" 
+                    onClick={() => onSend(ticket.id, draft)}
+                    disabled={sending}
+                    style={{ 
+                      cursor: sending ? 'not-allowed' : 'pointer',
+                      opacity: sending ? 0.6 : 1
+                    }}
+                  >
+                    {sending ? 'Sending...' : 'Send'}
                   </button>
                   <button className="btn secondary" onClick={onBack}>
                     Back to Home

@@ -23,6 +23,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [sending, setSending] = useState(false);
 
   // Function to refresh emails
   const refreshEmails = async () => {
@@ -252,10 +253,30 @@ export default function Dashboard() {
     }
   };
 
-  const handleSend = (ticketId, draftBody) => {
-    // For now, just close the detail view
-    // In a real implementation, this would call an API to send the email
-    setSelected(null);
+  const handleSend = async (ticketId, draftBody) => {
+    try {
+      setSending(true);
+      
+      // Update ticket status to 'closed'
+      await updateEmailTicket(ticketId, 'closed');
+      console.log(`Successfully updated email ${ticketId} ticket status to 'closed'`);
+      
+      // Update the local state to reflect the change
+      setEmails(prevEmails => 
+        prevEmails.map(e => 
+          e.id === ticketId ? { ...e, ticket: 'closed' } : e
+        )
+      );
+      
+      // Close the detail view after successful update
+      setSelected(null);
+    } catch (error) {
+      console.error('Failed to update email ticket status to closed:', error);
+      // Still close the view even if the update fails
+      setSelected(null);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleSimulateReply = (ticketId) => {
@@ -386,6 +407,7 @@ export default function Dashboard() {
             onBack={handleBackHome}
             onSimReply={handleSimulateReply}
             onRefresh={handleDetailRefresh}
+            sending={sending}
           />
         </main>
       )}
