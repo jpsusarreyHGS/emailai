@@ -51,3 +51,45 @@ export async function ingestEmails() {
   const data = await response.json();
   return data;
 }
+
+export async function runOcrForEmail(emailId) {
+  const res = await fetch(`${API_BASE_URL}/emails/${emailId}/attachments/ocr`, {
+    method: 'POST',
+  });
+  if (!res.ok) throw new Error(`OCR failed: ${res.statusText}`);
+  return res.json();
+}
+
+export async function generateDraftForEmail(emailId) {
+  const res = await fetch(`${API_BASE_URL}/emails/${emailId}/draft`, {
+    method: 'POST',
+  });
+  if (!res.ok) throw new Error(`Draft failed: ${res.statusText}`);
+  return res.json();
+}
+
+export async function fetchEmailDoc(emailId) {
+  const res = await fetch(`${API_BASE_URL}/emails/${emailId}/fetch`);
+  if (!res.ok) throw new Error(`Fetch email failed: ${res.statusText}`);
+  return res.json();
+}
+
+export async function saveEmailOcrEdits({ id, filename, merchant, date, total, model, store_number }) {
+  const res = await fetch(`${API_BASE_URL}/emails/save-edits`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, filename, merchant, date, total, model, store_number })
+  });
+  if (!res.ok) throw new Error(`Save edits failed: ${res.statusText}`);
+  return res.json();
+}
+
+export async function saveDraft(emailId, body) {
+  const res = await fetch(`${API_BASE_URL}/emails/save-edits`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: emailId, draft_body: body })
+  });
+  if (!res.ok) throw new Error(`Save draft failed: ${res.statusText}`);
+  return res.json();
+}

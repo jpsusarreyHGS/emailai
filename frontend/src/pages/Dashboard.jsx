@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HgsLogo from "../assets/HgsLogo.svg";
 import EmailDetail from "../components/EmailDetail";
 import EmailList from "../components/EmailList";
-import { fetchEmailsByAgent } from "../utils/api";
+import { fetchEmailsByAgent, fetchEmailDoc, saveDraft } from "../utils/api";
 import "./Dashboard.css";
 
 const ROSTER = {
@@ -167,53 +167,70 @@ export default function Dashboard() {
     return emails.filter(email => email.ticket === 'closed');
   }, [emails]);
 
-  const handleOpenEmail = (emailId) => {
+  const handleOpenEmail = async (emailId) => {
     const email = emails.find(e => e.id === emailId);
-    if (email) {
-      // Convert email to ticket format for EmailDetail component
-      const ticket = {
-        id: email.id,
-        email_id: email.id,
-        subject: email.subject,
-        sender: email.from,
-        received_at: email.received_at,
-        status: "awaiting_review",
-        email_body: email.body,
-        attachments: (email.attachments || []).map((attachment, i) => ({
-          sasUrl: attachment.blobPath || `mock/blob/${i}`,
-          blob: attachment.blobPath || `mock/blob/${i}`,
-          name: attachment.name || `attachment_${i}`
-        })),
-        extracted: {
-          merchant: "Unknown",
-          date: new Date().toISOString().slice(0, 10),
-          total: 0,
-          model: "—",
-          storeNumber: "—",
-        },
-        scores: { confidence: 85, dup_score: 15, fraud_score: 5 },
-        validation: { status: "pass", rules_passed: ["basic_validation"], rules_failed: [] },
-        draft_reply: {
-          template: "response",
-          body: `Hi ${email.from?.name || "Customer"},\n\nThank you for your email. We will review your request and get back to you shortly.\n\nBest regards,\nSupport Team`,
-        },
-        thread: [
-          { id: email.messageId, direction: "in", subject: email.subject, body: email.body, at: email.received_at }
-        ],
-        assignee: email.assignee,
-        tags: email.tags || []
-      };
-      setSelected(ticket);
-    }
+    if (!email) return;
+
+    // Open detail with existing data only (no OCR/Draft run here)
+    const doc = await fetchEmailDoc(email.id).catch(() => ({}));
+    const atts = (doc.attachments || email.attachments || []).map((a, i) => ({
+      sasUrl: a.blobPath || `mock/blob/${i}`,
+      blob: a.blobPath || `mock/blob/${i}`,
+      name: a.name || a.filename || a?.name || `attachment_${i}`,
+      ocr: a.ocr || null,
+    }));
+
+    const ticket = {
+      id: doc.id || email.id,
+      email_id: doc.id || email.id,
+      subject: doc.subject || email.subject,
+      sender: email.from,
+      received_at: doc.receivedDateTime || email.received_at,
+      status: doc.ticket || "awaiting_review",
+      email_body: doc.body?.content || doc.body || email.body,
+      attachments: atts,
+      extracted: { merchant: null, date: null, total: null, model: null, store_number: null },
+      attachmentName: atts[0]?.name,
+      scores: { confidence: 0, duplication: 0 },
+      overall_confidence: doc.overall_confidence || 0,
+      overall_duplication: doc.overall_duplication || 0,
+      draft_reply: doc.draft_reply || { template: "response", body: "" },
+      thread: [ { id: email.messageId, direction: "in", subject: email.subject, body: email.body, at: email.received_at } ],
+      assignee: email.assignee,
+      tags: email.tags || []
+    };
+    setSelected(ticket);
   };
 
-  const handleSave = (ticketId, draftBody) => {
-    // For now, just update the selected ticket
-    if (selected && selected.id === ticketId) {
+  const handleSave = async (ticketId, draftBody) => {
+    try {
+      // Update draft locally (backend draft save/send not implemented here)
+      if (selected && selected.id === ticketId) {
+        setSelected(prev => ({
+          ...prev,
+          draft_reply: { ...prev.draft_reply, body: draftBody }
+        }));
+      }
+
+      // Persist draft to backend
+      await saveDraft(ticketId, draftBody);
+
+      // Refresh the email document to reflect persisted data
+      const updated = await fetchEmailDoc(ticketId).catch(() => ({}));
+      const atts = (updated.attachments || []).map((a, i) => ({
+        sasUrl: a.blobPath || `mock/blob/${i}`,
+        blob: a.blobPath || `mock/blob/${i}`,
+        name: a.name || a.filename || `attachment_${i}`,
+        ocr: a.ocr || null,
+      }));
       setSelected(prev => ({
         ...prev,
-        draft_reply: { ...prev.draft_reply, body: draftBody }
+        // extracted unchanged (read-only, controlled via Generate)
+        attachments: atts,
       }));
+    } catch (e) {
+      console.error('Failed to save edits:', e);
+      alert('Failed to save edits');
     }
   };
 
@@ -230,6 +247,27 @@ export default function Dashboard() {
   };
 
   const handleBackHome = () => setSelected(null);
+
+  // Receive refreshed data from EmailDetail Generate flow
+  const handleDetailRefresh = (freshDoc) => {
+    console.log("Dashboard received refresh data:", freshDoc);
+    setSelected(prev => ({
+      ...prev,
+      // Keep core ticket identity
+      id: freshDoc.id || prev.id,
+      email_id: freshDoc.id || prev.email_id,
+      subject: freshDoc.subject || prev.subject,
+      email_body: freshDoc.body?.content || freshDoc.body || prev.email_body,
+          // Update visuals
+          attachments: freshDoc.attachments || prev.attachments,
+          extracted: freshDoc.extracted || prev.extracted,
+          scores: freshDoc.scores || prev.scores,
+          overall_confidence: freshDoc.overall_confidence || prev.overall_confidence,
+          overall_duplication: freshDoc.overall_duplication || prev.overall_duplication,
+      // Preserve draft body if provided
+      draft_reply: freshDoc.draft_reply || prev.draft_reply,
+    }));
+  };
 
   const viewTitle = `${selectedProfile.name} Dashboard`;
   const roleSubtitle = `Agent ID: ${selectedProfile.id}`;
@@ -329,6 +367,7 @@ export default function Dashboard() {
             onSend={handleSend}
             onBack={handleBackHome}
             onSimReply={handleSimulateReply}
+            onRefresh={handleDetailRefresh}
           />
         </main>
       )}

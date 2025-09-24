@@ -1,3 +1,4 @@
+#backend\function_app.py
 import datetime
 import json
 import logging
@@ -5,10 +6,12 @@ import logging
 import azure.functions as func
 from functions.categorize import categorize_emails
 from functions.emails import (get_emails_by_assigned_agent, get_emails_by_id,
-                              get_emails_by_status, ingest_emails)
+                              get_emails_by_status, ingest_emails,fetch_email_by_id, save_email_edits)
 from functions.graph import graph_connect
 from functions.inbox import read_inbox, seed_inbox_from_file
 from functions.ocr import ocr_attachments
+from functions.draft import generate_draft
+from utils.blob_storage import BlobService
 
 app = func.FunctionApp()
 
@@ -89,8 +92,53 @@ def EmailsCategorize(req: func.HttpRequest) -> func.HttpResponse:
 def run_ocr(req: func.HttpRequest) -> func.HttpResponse:
   return ocr_attachments(req)
 
+@app.route(route="emails/{email_id}/draft", methods=["POST"])
+def EmailsDraft(req: func.HttpRequest) -> func.HttpResponse:
+    return generate_draft(req)
+
+@app.route(route="emails/{email_id}/fetch", auth_level=func.AuthLevel.ANONYMOUS)
+def EmailsFetchById(req: func.HttpRequest) -> func.HttpResponse:
+    return fetch_email_by_id(req)
+
+@app.route(route="emails/save-edits", methods=["POST", "OPTIONS"])
+def EmailsSaveEdits(req: func.HttpRequest) -> func.HttpResponse:
+    # Handle CORS preflight
+    if req.method == "OPTIONS":
+        return func.HttpResponse(
+            "",
+            status_code=204,
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        )
+    return save_email_edits(req)
 
 @app.function_name("health")
 @app.route(route="health", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def health(req: func.HttpRequest) -> func.HttpResponse:
   return func.HttpResponse("ok")
+
+
+@app.route(route="attachments/{container}/{*blob_path}", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def AttachmentProxy(req: func.HttpRequest) -> func.HttpResponse:
+  try:
+    container = req.route_params.get("container")
+    blob_path = req.route_params.get("blob_path")
+    if not container or not blob_path:
+      return func.HttpResponse("Missing path", status_code=400)
+
+    svc = BlobService()
+    data = svc.download_bytes(f"{container}/{blob_path}")
+    return func.HttpResponse(
+      body=data,
+      status_code=200,
+      mimetype="application/octet-stream",
+      headers={
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache"
+      }
+    )
+  except Exception as e:
+    return func.HttpResponse(str(e), status_code=500)

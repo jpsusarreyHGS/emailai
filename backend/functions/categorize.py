@@ -1,3 +1,4 @@
+#backend\functions\categorize.py
 import json
 import logging
 from typing import Any, Dict, Literal
@@ -186,7 +187,7 @@ def llm_categorize(email: Dict[str, Any]) -> Dict[str, str]:
   Returns:
     Dictionary with 'industry' and 'category' labels
   """
-  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}\n\nhasAttachments: {email['hasAttachments']}'
+  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}\n\nhasAttachments: {email["hasAttachments"]}'
 
   class CategoryOutput(BaseModel):
     industry: Literal['insurance', 'consumer']

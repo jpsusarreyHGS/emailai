@@ -1,10 +1,11 @@
+#backend\functions\emails.py
 import base64
 import json
 import logging
 
 import azure.functions as func
 from utils.blob_storage import BlobService
-from utils.db import bulk_upsert_items, process_html_content, query_container
+from utils.db import bulk_upsert_items, process_html_content, query_container, upsert_item
 from utils.graph import (ensure_token_or_auth_url, get_default_scopes,
                          get_message_attachment_content, list_inbox_messages,
                          list_message_attachments)
@@ -454,3 +455,147 @@ def ingest_emails(req: func.HttpRequest) -> func.HttpResponse:
           "Access-Control-Allow-Headers": "Content-Type"
             }
     )
+
+
+def save_email_edits(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Save user edits from the frontend into the email doc.
+    - If OCR fields are provided, update the OCR JSON in the matching attachment(s)
+    - If draft_body is provided, update email_doc.draft_reply.body
+    Confidence/duplication scores remain unchanged.
+    """
+    try:
+        body = req.get_json()
+        email_id = body.get("id")
+        if not email_id:
+            return func.HttpResponse("Missing email id", status_code=400)
+
+        # Fetch existing doc
+        query = "SELECT * FROM c WHERE c.id = @id"
+        params = [{"name": "@id", "value": email_id}]
+        items = query_container("emails-content", query, params)
+        if not items:
+            return func.HttpResponse(
+                json.dumps({"error": f"Email {email_id} not found"}),
+                status_code=404,
+                mimetype="application/json"
+            )
+
+        email_doc = items[0]
+        attachments = email_doc.get("attachments", [])
+
+        # 1) Update draft if provided
+        draft_body = body.get("draft_body") or body.get("draft") or body.get("body")
+        if draft_body is not None:
+            if not isinstance(email_doc.get("draft_reply"), dict):
+                email_doc["draft_reply"] = {"template": "response", "body": ""}
+            email_doc["draft_reply"]["body"] = draft_body
+
+        # 2) Update OCR fields if provided
+        editable_fields = ["merchant", "date", "total", "model", "store_number"]
+        has_ocr_field = any(field in body for field in editable_fields)
+        if has_ocr_field and attachments:
+            target_filename = body.get("filename") or body.get("name")
+            updated = False
+            for att in attachments:
+                att_name = att.get("name") or att.get("filename")
+                if target_filename and att_name != target_filename:
+                    continue
+                ocr_data = {}
+                if att.get("ocr") and att["ocr"].get("text"):
+                    try:
+                        ocr_data = json.loads(att["ocr"]["text"])
+                    except Exception:
+                        logging.warning("Failed to parse OCR JSON; resetting")
+                        ocr_data = {}
+                for field in editable_fields:
+                    if field in body:
+                        ocr_data[field] = body[field]
+                ocr_data["confidence_score"] = ocr_data.get("confidence_score", 0)
+                ocr_data["duplication_score"] = ocr_data.get("duplication_score", 0)
+                if "ocr" not in att:
+                    att["ocr"] = {}
+                att["ocr"]["text"] = json.dumps(ocr_data)
+                updated = True
+            if not updated and target_filename:
+                logging.info("No matching attachment found to update OCR fields")
+
+        # Save updated email doc
+        upsert_item("emails-content", email_doc)
+
+        return func.HttpResponse(
+            json.dumps(email_doc, indent=2),
+            status_code=200,
+            mimetype="application/json",
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        )
+
+    except Exception as e:
+        logging.error("Error saving email edits", exc_info=True)
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            status_code=500,
+            mimetype="application/json",
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        )
+
+def fetch_email_by_id(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Fetch a single email document by ID from emails-content.
+    Uses route param: email_id
+    """
+    try:
+        email_id = req.route_params.get("email_id")
+        if not email_id:
+            return func.HttpResponse(
+                json.dumps({"error": "email_id route parameter is required"}),
+                status_code=400,
+                mimetype="application/json"
+            )
+
+        logging.info(f"Fetching email with id: {email_id}")
+
+        # Query Cosmos DB
+        query = "SELECT * FROM c WHERE c.id = @id"
+        params = [{"name": "@id", "value": email_id}]
+        items = query_container("emails-content", query, params)
+
+        if not items:
+            return func.HttpResponse(
+                json.dumps({"error": f"No email found with id: {email_id}"}),
+                status_code=404,
+                mimetype="application/json"
+            )
+
+        # Return the single email document
+        return func.HttpResponse(
+            json.dumps(items[0]),
+            status_code=200,
+            mimetype="application/json",
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        )
+
+    except Exception as e:
+        logging.error(f"Error in fetch_email_by_id: {str(e)}")
+        return func.HttpResponse(
+            json.dumps({"error": "Failed to fetch email by id", "details": str(e)}),
+            status_code=500,
+            mimetype="application/json",
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        )
