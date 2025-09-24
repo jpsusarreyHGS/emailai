@@ -1,16 +1,17 @@
-#backend\function_app.py
+# backend\function_app.py
 import datetime
 import json
 import logging
 
 import azure.functions as func
 from functions.categorize import categorize_emails
-from functions.emails import (get_emails_by_assigned_agent, get_emails_by_id,
-                              get_emails_by_status, ingest_emails,fetch_email_by_id, save_email_edits)
+from functions.draft import generate_draft
+from functions.emails import (fetch_email_by_id, get_emails_by_assigned_agent,
+                              get_emails_by_status, ingest_emails,
+                              save_email_edits, update_email_ticket)
 from functions.graph import graph_connect
 from functions.inbox import read_inbox, seed_inbox_from_file
 from functions.ocr import ocr_attachments
-from functions.draft import generate_draft
 from utils.blob_storage import BlobService
 
 app = func.FunctionApp()
@@ -42,20 +43,6 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
 @app.route(route="emails", auth_level=func.AuthLevel.FUNCTION, methods=["GET"])
 def Emails(req: func.HttpRequest) -> func.HttpResponse:
   """Endpoint to get emails, optionally filtered by id, assigned_agent, or status."""
-
-  # Check for id parameter first (from query string or body) - most specific
-  email_id = req.params.get('id')
-  if not email_id:
-    try:
-      req_body = req.get_json()
-      if req_body:
-        email_id = req_body.get('id')
-    except ValueError:
-      pass
-
-  # If id parameter is provided, use the id function
-  if email_id:
-    return get_emails_by_id(req)
 
   # Check for assigned_agent parameter (from query string or body)
   assigned_agent = req.params.get('assigned_agent')
@@ -92,28 +79,49 @@ def EmailsCategorize(req: func.HttpRequest) -> func.HttpResponse:
 def run_ocr(req: func.HttpRequest) -> func.HttpResponse:
   return ocr_attachments(req)
 
+
 @app.route(route="emails/{email_id}/draft", methods=["POST"])
 def EmailsDraft(req: func.HttpRequest) -> func.HttpResponse:
-    return generate_draft(req)
+  return generate_draft(req)
+
 
 @app.route(route="emails/{email_id}/fetch", auth_level=func.AuthLevel.ANONYMOUS)
 def EmailsFetchById(req: func.HttpRequest) -> func.HttpResponse:
-    return fetch_email_by_id(req)
+  return fetch_email_by_id(req)
+
 
 @app.route(route="emails/save-edits", methods=["POST", "OPTIONS"])
 def EmailsSaveEdits(req: func.HttpRequest) -> func.HttpResponse:
-    # Handle CORS preflight
-    if req.method == "OPTIONS":
-        return func.HttpResponse(
-            "",
-            status_code=204,
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type"
-            }
-        )
-    return save_email_edits(req)
+  # Handle CORS preflight
+  if req.method == "OPTIONS":
+    return func.HttpResponse(
+        "",
+        status_code=204,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+        }
+    )
+  return save_email_edits(req)
+
+
+@app.route(route="emails/{email_id}/ticket", auth_level=func.AuthLevel.FUNCTION, methods=["POST", "OPTIONS"])
+def EmailsUpdateTicket(req: func.HttpRequest) -> func.HttpResponse:
+  """Endpoint to update the ticket status of a specific email."""
+  # Handle CORS preflight
+  if req.method == "OPTIONS":
+    return func.HttpResponse(
+        "",
+        status_code=204,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+        }
+    )
+  return update_email_ticket(req)
+
 
 @app.function_name("health")
 @app.route(route="health", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
