@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HgsLogo from "../assets/HgsLogo.svg";
 import EmailDetail from "../components/EmailDetail";
 import EmailList from "../components/EmailList";
-import { fetchEmailsByAgent, fetchEmailDoc, saveDraft } from "../utils/api";
+import { fetchEmailDoc, fetchEmailsByAgent, saveDraft, updateEmailTicket } from "../utils/api";
 import "./Dashboard.css";
 
 const ROSTER = {
@@ -171,7 +171,7 @@ export default function Dashboard() {
     const email = emails.find(e => e.id === emailId);
     if (!email) return;
 
-    // Open detail with existing data only (no OCR/Draft run here)
+    // Immediately open the email detail view (no waiting)
     const doc = await fetchEmailDoc(email.id).catch(() => ({}));
     const atts = (doc.attachments || email.attachments || []).map((a, i) => ({
       sasUrl: a.blobPath || `mock/blob/${i}`,
@@ -200,6 +200,24 @@ export default function Dashboard() {
       tags: email.tags || []
     };
     setSelected(ticket);
+
+    // If this is a 'new' email, update its ticket status to 'open' in the background
+    if (email.ticket === 'new') {
+      // Fire and forget - don't await this call
+      updateEmailTicket(emailId, 'open')
+        .then(() => {
+          console.log(`Successfully updated email ${emailId} ticket status to 'open'`);
+          // Update the local state after the background call completes
+          setEmails(prevEmails => 
+            prevEmails.map(e => 
+              e.id === emailId ? { ...e, ticket: 'open' } : e
+            )
+          );
+        })
+        .catch(error => {
+          console.error('Failed to update email ticket status:', error);
+        });
+    }
   };
 
   const handleSave = async (ticketId, draftBody) => {

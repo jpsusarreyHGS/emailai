@@ -93,3 +93,13 @@ export async function saveDraft(emailId, body) {
   if (!res.ok) throw new Error(`Save draft failed: ${res.statusText}`);
   return res.json();
 }
+
+export async function updateEmailTicket(emailId, ticket) {
+  const res = await fetch(`${API_BASE_URL}/emails/${emailId}/ticket`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ticket })
+  });
+  if (!res.ok) throw new Error(`Update ticket failed: ${res.statusText}`);
+  return res.json();
+}
