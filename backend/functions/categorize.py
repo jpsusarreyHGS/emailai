@@ -1,3 +1,4 @@
+#backend\functions\categorize.py
 import json
 import logging
 from typing import Any, Dict, Literal
@@ -80,7 +81,12 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
               "emails_processed": 0
           }),
           status_code=200,
-          mimetype="application/json"
+          mimetype="application/json",
+          headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+              }
       )
 
     # Step 2: For each email, make LLM call to determine labels and update status
@@ -104,6 +110,7 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
         email_update["status"] = "categorized"  # Update status
         email_update["labels"] = labels  # Add labels
         email_update["assigned_agent"] = assigned_agent  # Add assigned agent
+        email_update["ticket"] = "new"
 
         # Add to bulk update list
         emails_to_update.append(email_update)
@@ -148,7 +155,12 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
             "failures": failed_categorizations
         }),
         status_code=200,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+            }
     )
 
   except Exception as e:
@@ -156,7 +168,12 @@ def categorize_emails(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps({"error": "Failed to categorize emails"}),
         status_code=500,
-        mimetype="application/json"
+        mimetype="application/json",
+        headers={
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+            }
     )
 
 
@@ -170,7 +187,7 @@ def llm_categorize(email: Dict[str, Any]) -> Dict[str, str]:
   Returns:
     Dictionary with 'industry' and 'category' labels
   """
-  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}\n\nhasAttachments: {email['hasAttachments']}'
+  email_str = f'### Email Content\n\nSubject: {email["subject"]}\n\nBody: {email["body"]["content"]}\n\nhasAttachments: {email["hasAttachments"]}'
 
   class CategoryOutput(BaseModel):
     industry: Literal['insurance', 'consumer']

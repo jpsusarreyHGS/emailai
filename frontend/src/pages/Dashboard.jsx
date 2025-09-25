@@ -1,194 +1,315 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import HgsLogo from "../assets/HgsLogo.svg";
 import EmailDetail from "../components/EmailDetail";
+import EmailList from "../components/EmailList";
+import { fetchEmailDoc, fetchEmailsByAgent, saveDraft, updateEmailTicket } from "../utils/api";
+import "./Dashboard.css";
 
 const ROSTER = {
-  coach: { id: "coach", name: "Coach View", role: "coach" },
-  alice: { id: "alice", name: "Alice", role: "analyst" },
-  bob:   { id: "bob",   name: "Bob",   role: "analyst" },
-  cara:  { id: "cara",  name: "Cara",  role: "analyst" },
+  agent_001: { id: "agent_001", name: "Coach Gerver" },
+  agent_002: { id: "agent_002", name: "Alice Thompson" },
+  agent_003: { id: "agent_003", name: "Bob Hernandez" },
+  agent_004: { id: "agent_004", name: "Cara Park" },
 };
-
-// Fallback seed emails (used only if nothing is passed from SortBoard)
-const DEFAULT_EMAILS = [
-  {
-    id: "EML-1001",
-    subject: "Warranty Request: Store #123 (ZX100)",
-    from: { name: "Jane Doe", email: "jane@example.com" },
-    body: "Hi team,\n\nAttaching receipt for ZX100 TV.\nStore: BB-0421, Total: $1299.99.\n\nThanks,\nJane",
-    attachments: [
-      "https://via.placeholder.com/600x800?text=Receipt+1",
-      "https://via.placeholder.com/600x800?text=Receipt+2",
-    ],
-    received_at: new Date().toISOString(),
-    messageId: "msg-1001",
-    assignee: { id: "alice", name: "Alice" },
-    tags: ["TV/Screen", "Warranty"]
-  },
-  {
-    id: "EML-1002",
-    subject: "Need help: Soundbar QX55 warranty",
-    from: { name: "Mark Lee", email: "mark@example.com" },
-    body: "Hello, re-sending a clearer receipt for the QX55 soundbar. Total: $249.50",
-    attachments: ["https://via.placeholder.com/600x800?text=Receipt+Blurry"],
-    received_at: new Date().toISOString(),
-    messageId: "msg-1002",
-    assignee: { id: "cara", name: "Cara" },
-    tags: ["Audio", "Warranty"]
-  }
-];
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const selectedProfile = state?.profile || ROSTER.coach;
+  const selectedProfile = state?.profile || ROSTER.agent_001;
 
-  const seedEmails = useMemo(() => {
-    if (Array.isArray(state?.emails) && state.emails.length) {
-      return state.emails.map((e, idx) => ({
-        id: e.id || `EML-${idx + 1}`,
-        subject: e.subject,
-        from: e.from || { email: "unknown@example.com" },
-        body: e.body || "",
-        attachments: e.attachments || [],
-        received_at: e.at || new Date().toISOString(),
-        messageId: e.messageId || `msg-${idx + 1}`,
-        assignee: e.assignedTo
-          ? { id: e.assignedTo, name: e.assignedTo[0].toUpperCase() + e.assignedTo.slice(1) }
-          : undefined,
-        tags: e.tags || []
-      }));
-    }
-    return DEFAULT_EMAILS;
-  }, [state]);
-
-  const [incomingEmails, setIncomingEmails] = useState(seedEmails);
-  const [tickets, setTickets] = useState([]);
+  const [emails, setEmails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [sending, setSending] = useState(false);
 
-  const visibleIncoming = useMemo(() => {
-    if (selectedProfile.role === "coach") return incomingEmails;
-    return incomingEmails.filter(e => e.assignee?.id === selectedProfile.id);
-  }, [incomingEmails, selectedProfile]);
+  // Function to refresh emails
+  const refreshEmails = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      console.log('Refreshing emails for agent:', selectedProfile.id);
+      
+      // Fetch emails assigned to this agent
+      const agentEmails = await fetchEmailsByAgent(selectedProfile.id);
+      
+      console.log('Received emails:', agentEmails.length);
+      
+      // Transform backend email format to Dashboard format
+      const transformedEmails = agentEmails.map((email, idx) => {
+        // Handle the emailAddress parsing - it might come as a string representation
+        let fromName = 'Unknown';
+        let fromEmail = 'unknown@example.com';
+        
+        if (email.from?.emailAddress) {
+          if (typeof email.from.emailAddress === 'string') {
+            // Parse string representation like "@{name=Nina Davis; address=nina.davis@example.com}"
+            const nameMatch = email.from.emailAddress.match(/name=([^;]+)/);
+            const emailMatch = email.from.emailAddress.match(/address=([^}]+)/);
+            fromName = nameMatch ? nameMatch[1] : 'Unknown';
+            fromEmail = emailMatch ? emailMatch[1] : 'unknown@example.com';
+          } else {
+            // Handle as object
+            fromName = email.from.emailAddress.name || 'Unknown';
+            fromEmail = email.from.emailAddress.address || 'unknown@example.com';
+          }
+        }
+        
+        return {
+          id: email.id || `EML-${idx + 1}`,
+          subject: email.subject || 'No Subject',
+          from: {
+            name: fromName,
+            email: fromEmail
+          },
+          body: email.body?.content || email.body || '',
+          attachments: email.attachments || [],
+          received_at: email.receivedDateTime || new Date().toISOString(),
+          messageId: email.id || `msg-${idx + 1}`,
+          assignee: { id: selectedProfile.id, name: selectedProfile.name },
+          tags: email.tags || [],
+          ticket: email.ticket || 'new', // Default to 'new' if no ticket status
+          labels: email.labels || null, // Include labels for category display
+          hasAttachments: !!(email.attachments && email.attachments.length > 0)
+        };
+      });
+      
+      console.log('Transformed emails:', transformedEmails);
+      setEmails(transformedEmails);
+    } catch (err) {
+      console.error('Failed to refresh emails:', err);
+      setError(err.message);
+      setEmails([]); // Set empty array on error
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const openTickets = useMemo(() => {
-    const all = tickets.filter(t => t.status !== "sent");
-    if (selectedProfile.role === "coach") return all;
-    return all.filter(t => t.assignee?.id === selectedProfile.id);
-  }, [tickets, selectedProfile]);
+  // Fetch emails for the selected agent on component mount
+  useEffect(() => {
+    async function loadEmails() {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        console.log('Fetching emails for agent:', selectedProfile.id);
+        
+        // Fetch emails assigned to this agent
+        const agentEmails = await fetchEmailsByAgent(selectedProfile.id);
+        
+        console.log('Received emails:', agentEmails.length);
+        
+        // Transform backend email format to Dashboard format
+        const transformedEmails = agentEmails.map((email, idx) => {
+          // Handle the emailAddress parsing - it might come as a string representation
+          let fromName = 'Unknown';
+          let fromEmail = 'unknown@example.com';
+          
+          if (email.from?.emailAddress) {
+            if (typeof email.from.emailAddress === 'string') {
+              // Parse string representation like "@{name=Nina Davis; address=nina.davis@example.com}"
+              const nameMatch = email.from.emailAddress.match(/name=([^;]+)/);
+              const emailMatch = email.from.emailAddress.match(/address=([^}]+)/);
+              fromName = nameMatch ? nameMatch[1] : 'Unknown';
+              fromEmail = emailMatch ? emailMatch[1] : 'unknown@example.com';
+            } else {
+              // Handle as object
+              fromName = email.from.emailAddress.name || 'Unknown';
+              fromEmail = email.from.emailAddress.address || 'unknown@example.com';
+            }
+          }
+          
+          return {
+            id: email.id || `EML-${idx + 1}`,
+            subject: email.subject || 'No Subject',
+            from: {
+              name: fromName,
+              email: fromEmail
+            },
+            body: email.body?.content || email.body || '',
+            attachments: email.attachments || [],
+            received_at: email.receivedDateTime || new Date().toISOString(),
+            messageId: email.id || `msg-${idx + 1}`,
+            assignee: { id: selectedProfile.id, name: selectedProfile.name },
+            tags: email.tags || [],
+            ticket: email.ticket || 'new', // Default to 'new' if no ticket status
+            labels: email.labels || null, // Include labels for category display
+            hasAttachments: !!(email.attachments && email.attachments.length > 0)
+          };
+        });
+        
+        console.log('Transformed emails:', transformedEmails);
+        setEmails(transformedEmails);
+      } catch (err) {
+        console.error('Failed to load emails:', err);
+        setError(err.message);
+        setEmails([]); // Set empty array on error
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadEmails();
+  }, [selectedProfile.id, selectedProfile.name]);
 
-  const closedTickets = useMemo(() => {
-    const all = tickets.filter(t => t.status === "sent");
-    if (selectedProfile.role === "coach") return all;
-    return all.filter(t => t.assignee?.id === selectedProfile.id);
-  }, [tickets, selectedProfile]);
+  // Split emails into three columns based on ticket field
+  const newEmails = useMemo(() => {
+    return emails.filter(email => email.ticket === 'new');
+  }, [emails]);
 
-  function mkTicketFromEmail(em) {
-    const ingestionKey = `${em.messageId}|${(em.attachments || []).join("|")}`;
-    const exists = tickets.find(t => t.ingestionKey === ingestionKey);
-    if (exists) return exists;
+  const openEmails = useMemo(() => {
+    return emails.filter(email => email.ticket === 'open');
+  }, [emails]);
 
-    const model = em.subject.match(/ZX100|QX55/i)?.[0]?.toUpperCase() || "—";
-    const defaultScores = model === "ZX100"
-      ? { confidence: 92, dup_score: 12, fraud_score: 8 }
-      : { confidence: 86, dup_score: 18, fraud_score: 10 };
+  const closedEmails = useMemo(() => {
+    return emails.filter(email => email.ticket === 'closed');
+  }, [emails]);
 
-    const t = {
-      id: `TKT-${Math.random().toString(16).slice(2, 8).toUpperCase()}`,
-      ingestionKey,
-      email_id: em.id,
-      subject: em.subject,
-      sender: em.from,
-      received_at: em.received_at,
-      status: "awaiting_review",
-      email_body: em.body,
-      attachments: (em.attachments || []).map((url, i) => ({ sasUrl: url, blob: `mock/blob/${i}` })),
-      extracted: {
-        merchant: em.body?.includes("BB") ? "Best Buy" : "Unknown",
-        date: new Date().toISOString().slice(0, 10),
-        total: em.body?.includes("$1299.99") ? 1299.99 : 249.5,
-        model,
-        storeNumber: em.body?.match(/BB-\d{4}/)?.[0] || "—",
-      },
-      scores: defaultScores,
-      validation: { status: "pass", rules_passed: ["merchant_known"], rules_failed: [] },
-      draft_reply: {
-        template: "approve",
-        body:
-          `Hi ${em.from?.name || "Customer"},\n\n` +
-          `We verified your ${model} purchase on ${new Date().toISOString().slice(0,10)}. ` +
-          `Your warranty claim is approved.\n\nBest,\nSupport`,
-      },
-      thread: [
-        { id: em.messageId, direction: "in", subject: em.subject, body: em.body, at: em.received_at }
-      ],
-      assignee: em.assignee,
-      tags: em.tags || []
+  const handleOpenEmail = async (emailId) => {
+    const email = emails.find(e => e.id === emailId);
+    if (!email) return;
+
+    // Immediately open the email detail view (no waiting)
+    const doc = await fetchEmailDoc(email.id).catch(() => ({}));
+    const atts = (doc.attachments || email.attachments || []).map((a, i) => ({
+      sasUrl: a.blobPath || `mock/blob/${i}`,
+      blob: a.blobPath || `mock/blob/${i}`,
+      name: a.name || a.filename || a?.name || `attachment_${i}`,
+      ocr: a.ocr || null,
+    }));
+
+    const ticket = {
+      id: doc.id || email.id,
+      email_id: doc.id || email.id,
+      subject: doc.subject || email.subject,
+      sender: email.from,
+      received_at: doc.receivedDateTime || email.received_at,
+      status: doc.ticket || "awaiting_review",
+      email_body: doc.body?.content || doc.body || email.body,
+      attachments: atts,
+      extracted: { merchant: null, date: null, total: null, model: null, store_number: null },
+      attachmentName: atts[0]?.name,
+      scores: { confidence: 0, duplication: 0 },
+      overall_confidence: doc.overall_confidence || 0,
+      overall_duplication: doc.overall_duplication || 0,
+      draft_reply: doc.draft_reply || { template: "response", body: "" },
+      thread: [ { id: email.messageId, direction: "in", subject: email.subject, body: email.body, at: email.received_at } ],
+      assignee: email.assignee,
+      tags: email.tags || []
     };
-    return t;
-  }
+    setSelected(ticket);
 
-  const handleOpenIncoming = (emailId) => {
-    const em = incomingEmails.find(e => e.id === emailId);
-    if (!em) return;
-    const t = mkTicketFromEmail(em);
-
-    setTickets(prev => {
-      if (prev.find(x => x.ingestionKey === t.ingestionKey)) return prev;
-      return [t, ...prev];
-    });
-    setIncomingEmails(prev => prev.filter(e => e.id !== em.id));
-    setSelected(t);
+    // If this is a 'new' email, update its ticket status to 'open' in the background
+    if (email.ticket === 'new') {
+      // Fire and forget - don't await this call
+      updateEmailTicket(emailId, 'open')
+        .then(() => {
+          console.log(`Successfully updated email ${emailId} ticket status to 'open'`);
+          // Update the local state after the background call completes
+          setEmails(prevEmails => 
+            prevEmails.map(e => 
+              e.id === emailId ? { ...e, ticket: 'open' } : e
+            )
+          );
+        })
+        .catch(error => {
+          console.error('Failed to update email ticket status:', error);
+        });
+    }
   };
 
-  const handleOpenTicket = (ticketId) => {
-    const t = tickets.find(x => x.id === ticketId);
-    if (t) setSelected(t);
+  const handleSave = async (ticketId, draftBody) => {
+    try {
+      // Update draft locally (backend draft save/send not implemented here)
+      if (selected && selected.id === ticketId) {
+        setSelected(prev => ({
+          ...prev,
+          draft_reply: { ...prev.draft_reply, body: draftBody }
+        }));
+      }
+
+      // Persist draft to backend
+      await saveDraft(ticketId, draftBody);
+
+      // Refresh the email document to reflect persisted data
+      const updated = await fetchEmailDoc(ticketId).catch(() => ({}));
+      const atts = (updated.attachments || []).map((a, i) => ({
+        sasUrl: a.blobPath || `mock/blob/${i}`,
+        blob: a.blobPath || `mock/blob/${i}`,
+        name: a.name || a.filename || `attachment_${i}`,
+        ocr: a.ocr || null,
+      }));
+      setSelected(prev => ({
+        ...prev,
+        // extracted unchanged (read-only, controlled via Generate)
+        attachments: atts,
+      }));
+    } catch (e) {
+      console.error('Failed to save edits:', e);
+      alert('Failed to save edits');
+    }
   };
 
-  const handleSave = (ticketId, draftBody) => {
-    setTickets(prev =>
-      prev.map(t => t.id === ticketId ? { ...t, draft_reply: { ...t.draft_reply, body: draftBody } } : t)
-    );
-  };
-
-  const handleSend = (ticketId, draftBody) => {
-    setTickets(prev =>
-      prev.map(t => t.id === ticketId ? { ...t, status: "sent", draft_reply: { ...t.draft_reply, body: draftBody } } : t)
-    );
-    setSelected(null);
+  const handleSend = async (ticketId, draftBody) => {
+    try {
+      setSending(true);
+      
+      // Update ticket status to 'closed'
+      await updateEmailTicket(ticketId, 'closed');
+      console.log(`Successfully updated email ${ticketId} ticket status to 'closed'`);
+      
+      // Update the local state to reflect the change
+      setEmails(prevEmails => 
+        prevEmails.map(e => 
+          e.id === ticketId ? { ...e, ticket: 'closed' } : e
+        )
+      );
+      
+      // Close the detail view after successful update
+      setSelected(null);
+    } catch (error) {
+      console.error('Failed to update email ticket status to closed:', error);
+      // Still close the view even if the update fails
+      setSelected(null);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleSimulateReply = (ticketId) => {
-    setTickets(prev =>
-      prev.map(t => t.id === ticketId
-        ? {
-            ...t,
-            status: "awaiting_review",
-            thread: [
-              ...t.thread,
-              { id: `reply-${Date.now()}`, direction: "in", subject: `Re: ${t.subject}`, body: "Customer: thanks!", at: new Date().toISOString() }
-            ]
-          }
-        : t
-      )
-    );
+    // For now, just close the detail view
+    // In a real implementation, this would simulate a customer reply
     setSelected(null);
   };
 
   const handleBackHome = () => setSelected(null);
 
-  const viewTitle =
-    selectedProfile.id === "coach"
-      ? "Coach View"
-      : `${selectedProfile.name} View`;
+  // Receive refreshed data from EmailDetail Generate flow
+  const handleDetailRefresh = (freshDoc) => {
+    console.log("Dashboard received refresh data:", freshDoc);
+    setSelected(prev => ({
+      ...prev,
+      // Keep core ticket identity
+      id: freshDoc.id || prev.id,
+      email_id: freshDoc.id || prev.email_id,
+      subject: freshDoc.subject || prev.subject,
+      email_body: freshDoc.body?.content || freshDoc.body || prev.email_body,
+          // Update visuals
+          attachments: freshDoc.attachments || prev.attachments,
+          extracted: freshDoc.extracted || prev.extracted,
+          scores: freshDoc.scores || prev.scores,
+          overall_confidence: freshDoc.overall_confidence || prev.overall_confidence,
+          overall_duplication: freshDoc.overall_duplication || prev.overall_duplication,
+      // Preserve draft body if provided
+      draft_reply: freshDoc.draft_reply || prev.draft_reply,
+    }));
+  };
 
-  const roleSubtitle =
-    selectedProfile.id === "coach"
-      ? "See all tickets across analysts"
-      : "Analyst-specific view (assigned only)";
+  const viewTitle = `${selectedProfile.name} Dashboard`;
+  const roleSubtitle = `Agent ID: ${selectedProfile.id}`;
 
   return (
     <div className="dashboard">
@@ -200,57 +321,80 @@ export default function Dashboard() {
             <div className="subtitle">{roleSubtitle}</div>
           </div>
         </div>
-        <div>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            className="btn secondary"
+            onClick={refreshEmails}
+            disabled={loading}
+            style={{ 
+              background: '#1976d2',
+              color: 'white',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1
+            }}
+          >
+            {loading ? 'Refreshing...' : 'Refresh'}
+          </button>
           <button className="btn secondary" onClick={() => navigate("/")}>
-            ← Back to Dashboard
+            ← Back to Home
           </button>
         </div>
       </div>
 
-      {!selected ? (
+      {loading ? (
+        <div className="loading">Loading emails...</div>
+      ) : error ? (
+        <div className="error">
+          <p>Error loading emails: {error}</p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      ) : !selected ? (
         <div className="board">
           <section className="column">
-            <h2>Incoming Emails</h2>
+            <h2>New Emails ({newEmails.length})</h2>
             <EmailList
-              items={visibleIncoming.map(e => ({
+              items={newEmails.map(e => ({
                 id: e.id,
                 title: e.subject,
                 subtitle: `${e.from?.name || ""} <${e.from?.email || ""}>`,
                 at: e.received_at,
-                assignee: e.assignee,
-                tags: e.tags
+                tags: e.tags,
+                labels: e.labels,
+                hasAttachments: e.hasAttachments
               }))}
-              onOpen={handleOpenIncoming}
+              onOpen={handleOpenEmail}
             />
           </section>
 
           <section className="column">
-            <h2>Open Tickets</h2>
+            <h2>Open Emails ({openEmails.length})</h2>
             <EmailList
-              items={openTickets.map(t => ({
-                id: t.id,
-                title: `[${t.id}] ${t.subject}`,
-                subtitle: `${t.sender?.name || ""} <${t.sender?.email || ""}>`,
-                at: t.received_at,
-                assignee: t.assignee,
-                tags: t.tags
+              items={openEmails.map(e => ({
+                id: e.id,
+                title: e.subject,
+                subtitle: `${e.from?.name || ""} <${e.from?.email || ""}>`,
+                at: e.received_at,
+                tags: e.tags,
+                labels: e.labels,
+                hasAttachments: e.hasAttachments
               }))}
-              onOpen={handleOpenTicket}
+              onOpen={handleOpenEmail}
             />
           </section>
 
           <section className="column">
-            <h2>Closed Tickets</h2>
+            <h2>Closed Emails ({closedEmails.length})</h2>
             <EmailList
-              items={closedTickets.map(t => ({
-                id: t.id,
-                title: `[${t.id}] ${t.subject}`,
-                subtitle: `${t.sender?.name || ""} <${t.sender?.email || ""}>`,
-                at: t.received_at,
-                assignee: t.assignee,
-                tags: t.tags
+              items={closedEmails.map(e => ({
+                id: e.id,
+                title: e.subject,
+                subtitle: `${e.from?.name || ""} <${e.from?.email || ""}>`,
+                at: e.received_at,
+                tags: e.tags,
+                labels: e.labels,
+                hasAttachments: e.hasAttachments
               }))}
-              onOpen={handleOpenTicket}
+              onOpen={handleOpenEmail}
             />
           </section>
         </div>
@@ -262,6 +406,8 @@ export default function Dashboard() {
             onSend={handleSend}
             onBack={handleBackHome}
             onSimReply={handleSimulateReply}
+            onRefresh={handleDetailRefresh}
+            sending={sending}
           />
         </main>
       )}
