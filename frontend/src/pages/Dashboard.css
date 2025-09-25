@@ -67,13 +67,23 @@ body{
 /* 2×2 profile tiles on right */
 .profiles-grid{
   display:grid; gap:18px;
-  grid-template-columns: 1fr 1fr; align-content:start;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
 }
 .profile-card{
   background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0));
   border:1px solid var(--border);
   border-radius:16px; padding:16px;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.profile-card .list.compact {
+  flex: 1;
+  margin: 12px 0;
 }
 .profile-head{ display:flex; gap:12px; align-items:center; }
 .avatar{
@@ -86,7 +96,7 @@ body{
 .profile-role{ color:#9ca3af; font-size:.95rem; }
 
 /* Lists, items (shared with both pages) */
-.list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; align-content: start; }
 .list.compact .item{ padding:12px; }
 .item{
   background: var(--card);
@@ -124,6 +134,14 @@ body{
   transition: transform .16s ease, filter .16s ease;
 }
 .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.btn:disabled{ 
+  cursor: not-allowed; 
+  opacity: 0.6;
+}
+.btn:disabled:hover{ 
+  transform: none; 
+  filter: none; 
+}
 .btn.secondary{ background:#111827; box-shadow:none; border:1px solid var(--border); color:#e5e7eb; }
 .btn.gray{ background:#334155; box-shadow:none; }
 

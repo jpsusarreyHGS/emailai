@@ -70,6 +70,8 @@ export default function SortBoard() {
   const [emails, setEmails] = useState([]);
   const [categorizedEmails, setCategorizedEmails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sorting, setSorting] = useState(false);
+  const [checking, setChecking] = useState(false);
   const [error, setError] = useState(null);
 
   // Fetch emails from backend on component mount
@@ -172,7 +174,7 @@ export default function SortBoard() {
 
   const handleFilterSort = async () => {
     try {
-      setLoading(true);
+      setSorting(true);
       setError(null);
       
       // Call the categorize endpoint
@@ -225,13 +227,13 @@ export default function SortBoard() {
       console.error('Failed to categorize emails:', err);
       setError(`Failed to categorize emails: ${err.message}`);
     } finally {
-      setLoading(false);
+      setSorting(false);
     }
   };
 
   const handleCheckInbox = async () => {
     try {
-      setLoading(true);
+      setChecking(true);
       setError(null);
       
       // Call the ingest endpoint
@@ -278,7 +280,7 @@ export default function SortBoard() {
       console.error('Failed to check inbox:', err);
       setError(`Failed to check inbox: ${err.message}`);
     } finally {
-      setLoading(false);
+      setChecking(false);
     }
   };
 
@@ -344,59 +346,67 @@ export default function SortBoard() {
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ cursor: (loading || sorting || checking) ? 'wait' : 'default' }}>
       <div className="header">
         <div className="brand">
           <img className="logo" src={HgsLogo} alt="EmailAI logo" />
           <div>
             <div className="title">EmailAI</div>
-            <div className="subtitle">Inbox → Pick a profile to open the board</div>
+            <div className="subtitle">Process incoming messages and access agent dashboards</div>
           </div>
         </div>
-        <div></div>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            onClick={handleRefreshEmails} 
+            disabled={loading}
+            className="btn secondary"
+            style={{ 
+              background: '#1976d2',
+              color: 'white',
+              cursor: loading ? 'wait' : 'pointer',
+              opacity: loading ? 0.6 : 1
+            }}
+          >
+            {loading ? 'Refreshing...' : 'Refresh'}
+          </button>
+        </div>
       </div>
 
       <div className="preboard">
         <section className="inbox">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-            <div>
-              <h2 style={{ margin: '0 0 4px 0', display: 'flex', alignItems: 'center' }}>
-                Incoming Email
-                <button 
-                  onClick={handleRefreshEmails} 
-                  disabled={loading}
-                  style={{ 
-                    marginLeft: '10px',
-                    fontSize: '12px', 
-                    padding: '4px 8px',
-                    background: '#1976d2',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: loading ? 'not-allowed' : 'pointer',
-                    opacity: loading ? 0.6 : 1
-                  }}
-                >
-                  {loading ? 'Loading...' : 'Refresh'}
-                </button>
-              </h2>
-              <div className="hint">All new emails appear here first.</div>
-            </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+            <h2 style={{ margin: '0', fontSize: '1.3rem', fontWeight: '800', color: '#eef2f7' }}>
+              Incoming Email
+            </h2>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button className="btn" onClick={handleCheckInbox} disabled={loading}>
-                Check Inbox
+              <button 
+                className="btn" 
+                onClick={handleCheckInbox} 
+                disabled={loading || sorting || checking}
+                style={{
+                  cursor: checking ? 'wait' : (loading || sorting) ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {checking ? 'Checking Inbox...' : 'Check Inbox'}
               </button>
               <button 
                 className={inboxEmails.length === 0 ? "btn gray" : "btn"} 
                 onClick={handleFilterSort}
-                disabled={loading || inboxEmails.length === 0}
+                disabled={loading || sorting || checking || inboxEmails.length === 0}
+                style={{
+                  cursor: sorting ? 'wait' : (loading || checking || inboxEmails.length === 0) ? 'not-allowed' : 'pointer'
+                }}
               >
-                Sort
+                {sorting ? 'Sorting...' : 'Sort'}
               </button>
             </div>
           </div>
           {loading ? (
-            <div className="loading">Loading emails...</div>
+            <div className="empty">Loading messages...</div>
+          ) : sorting ? (
+            <div className="empty">Sorting messages. This may take a few moments...</div>
+          ) : checking ? (
+            <div className="empty">Checking Outlook inbox for new messages. This may take a few moments...</div>
           ) : error ? (
             <div className="error">
               <p>Error loading emails: {error}</p>
@@ -410,7 +420,7 @@ export default function SortBoard() {
                 </li>
               ))}
               {inboxEmails.length === 0 && (
-                <div className="empty">No unassigned emails.</div>
+                <div className="empty">There are currently no new messages.</div>
               )}
             </ul>
           )}
