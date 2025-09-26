@@ -312,7 +312,7 @@ export default function Dashboard() {
   const roleSubtitle = `Agent ID: ${selectedProfile.id}`;
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ cursor: loading ? 'wait' : 'default' }}>
       <div className="header">
         <div className="brand">
           <img className="logo" src={HgsLogo} alt="EmailAI logo" />
@@ -329,7 +329,7 @@ export default function Dashboard() {
             style={{ 
               background: '#1976d2',
               color: 'white',
-              cursor: loading ? 'not-allowed' : 'pointer',
+              cursor: loading ? 'wait' : 'pointer',
               opacity: loading ? 0.6 : 1
             }}
           >
